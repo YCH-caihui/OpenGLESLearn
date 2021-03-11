@@ -9,6 +9,12 @@ cmake_minimum_required(VERSION 3.10.2)
 
 project("opengleslearn")
 
+
+set(OPENGL_LIB GLESv3)
+
+include_directories(include)
+
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -20,6 +26,7 @@ add_library( # Sets the name of the library.
              # Sets the library as a shared library.
              SHARED
 
+             src/GLProgram.cpp
              # Provides a relative path to your source file(s).
              native-lib.cpp )
 
@@ -42,6 +49,11 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
+
+                       ${OPENGL_LIB}
+                       android
+                       EGL
+                       m
 
                        # Links the target library to the log library
                        # included in the NDK.

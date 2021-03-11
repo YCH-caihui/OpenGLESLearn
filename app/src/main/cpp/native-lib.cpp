@@ -1,10 +1,35 @@
 #include <jni.h>
 #include <string>
+#include "GLMath.h"
+#include "include/GLShader.h"
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_caihui_opengleslearn_MainActivity_stringFromJNI(
+
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_caihui_opengleslearn_view_GLRootView_init(JNIEnv *env, jobject thiz, jint gl_type) {
+}
+
+
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_caihui_opengleslearn_view_GLRootView_onSurfaceCreated(
         JNIEnv* env,
         jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
+
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_caihui_opengleslearn_view_GLRootView_onSurfaceChanged(JNIEnv *env, jobject thiz,
+                                                               jint width, jint height) {
+
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_caihui_opengleslearn_view_GLRootView_onDrawFrame(JNIEnv *env, jobject thiz) {
+
+}
+
