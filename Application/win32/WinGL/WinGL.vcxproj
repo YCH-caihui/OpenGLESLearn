@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b56378a2-0966-4c6d-8850-5d68ab635a5e}</ProjectGuid>
+    <ProjectGuid>{fc8101d7-2b44-495b-ae62-e6915efc359f}</ProjectGuid>
     <RootNamespace>WinGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
