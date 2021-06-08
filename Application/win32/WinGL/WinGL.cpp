@@ -127,7 +127,7 @@ bool initOpenGLES()
 	EGLint major;
 	EGLint minor;
 
-	m_display = eglGetDisplay(GetDC(m_hWnd));
+	m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 	eglInitialize(m_display, &major, &minor);
 	eglChooseConfig(m_display, attrbs, &m_config, 1, &numConfigs);
 	eglGetConfigAttrib(m_display, m_config, EGL_NATIVE_VISUAL_ID, &format);
