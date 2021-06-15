@@ -6,6 +6,7 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 
+
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -179,8 +180,7 @@ void destoryOpenGLES()
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-	hInst = hInstance; // 将实例句柄存储在全局变量中
-
+	hInst = hInstance; // 将实例句柄存储在全局变量ff 
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, m_width, m_height, nullptr, nullptr, hInstance, nullptr);
 	m_hWnd = hWnd;
