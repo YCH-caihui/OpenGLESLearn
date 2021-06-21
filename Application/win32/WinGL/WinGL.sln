@@ -5,10 +5,15 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinGL", "WinGL.vcxproj", "{FC8101D7-2B44-495B-AE62-E6915EFC359F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{F17C547F-65D7-49AB-A6E2-7CC0BC59A403} = {F17C547F-65D7-49AB-A6E2-7CC0BC59A403}
+		{0FEF0E79-2216-4F56-BEB7-51E292642358} = {0FEF0E79-2216-4F56-BEB7-51E292642358}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "..\..\..\Math\Math.vcxproj", "{F17C547F-65D7-49AB-A6E2-7CC0BC59A403}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLPractice", "..\..\..\GLPractice\GLPractice.vcxproj", "{0FEF0E79-2216-4F56-BEB7-51E292642358}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F17C547F-65D7-49AB-A6E2-7CC0BC59A403} = {F17C547F-65D7-49AB-A6E2-7CC0BC59A403}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +51,18 @@ Global
 		{F17C547F-65D7-49AB-A6E2-7CC0BC59A403}.Release|x64.Build.0 = Release|x64
 		{F17C547F-65D7-49AB-A6E2-7CC0BC59A403}.Release|x86.ActiveCfg = Release|Win32
 		{F17C547F-65D7-49AB-A6E2-7CC0BC59A403}.Release|x86.Build.0 = Release|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|ARM.ActiveCfg = Debug|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|ARM64.ActiveCfg = Debug|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|x64.ActiveCfg = Debug|x64
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|x64.Build.0 = Debug|x64
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|x86.ActiveCfg = Debug|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Debug|x86.Build.0 = Debug|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|ARM.ActiveCfg = Release|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|ARM64.ActiveCfg = Release|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|x64.ActiveCfg = Release|x64
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|x64.Build.0 = Release|x64
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|x86.ActiveCfg = Release|Win32
+		{0FEF0E79-2216-4F56-BEB7-51E292642358}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
