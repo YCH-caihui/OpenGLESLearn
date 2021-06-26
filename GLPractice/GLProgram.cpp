@@ -9,10 +9,9 @@ GLProgram::GLProgram(const GLchar* vs, const GLchar* fs)
     vsId = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vsId, 1, &vs, 0);
 	glCompileShader(vsId);
-	glGetShaderiv(vsId, GL_SHADER_SOURCE_LENGTH, &parame);
+	glGetShaderiv(vsId, GL_COMPILE_STATUS, &parame);
 	if (parame != GL_TRUE)
 	{
-		
 		glGetShaderiv(vsId, GL_INFO_LOG_LENGTH, &parame);
 		GLchar* strInfoLog = new GLchar[parame + 1];
 		glGetShaderInfoLog(vsId, parame, nullptr, strInfoLog);
@@ -51,6 +50,15 @@ void GLProgram::use()
    glUseProgram(m_programId);
 }
 
+attribute GLProgram::getAttribLocation(const char * name)
+{
+	return glGetAttribLocation(m_programId, name);
+}
+
+uniform GLProgram::getUniformLocation(const char* name)
+{
+	return glGetAttribLocation(m_programId, name);
+}
 
 
 GLProgram::~GLProgram()

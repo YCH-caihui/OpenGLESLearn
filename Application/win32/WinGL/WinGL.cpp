@@ -43,9 +43,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	m_render = new GLRenderer();
-	m_render->enter(ID_EFFECT_DEFAULT);
-	m_render->onSurfaceCreate();
+	
+
 
 	// TODO: 在此处放置代码。
 
@@ -83,6 +82,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			{
 				m_render->onDrawFrame();
 			}
+			eglSwapBuffers(m_display, m_surface);
 		}
 	}
 
@@ -123,6 +123,7 @@ bool initOpenGLES()
 {
 	const EGLint attrbs[] =
 	{
+		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
 		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
 		EGL_BLUE_SIZE, 8,
 		EGL_GREEN_SIZE, 8,
@@ -204,10 +205,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	initOpenGLES();
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-	if (m_render) 
-	{
-		m_render->onSurfaceChanged(m_width, m_height);
-	}
+	m_render = new GLRenderer();
+	m_render->enter(ID_EFFECT_DEFAULT);
+	m_render->onSurfaceCreate();
+	m_render->onSurfaceChanged(m_width, m_height);
+	
 
 	return TRUE;
 }
