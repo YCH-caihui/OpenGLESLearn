@@ -19,12 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GLEffect.h" />
+    <ClInclude Include="GLEffectDefault.h" />
     <ClInclude Include="GLProgram.h" />
     <ClInclude Include="GLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLProgram.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="GLEffectDefault.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

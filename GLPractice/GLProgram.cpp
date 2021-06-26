@@ -2,24 +2,30 @@
 
 GLProgram::GLProgram(const GLchar* vs, const GLchar* fs)
 {
-	GLint  status;
+	GLint  parame = -1;
 	GLuint vsId = -1;
 	GLuint fsId = -1;
 
     vsId = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vsId, 1, &vs, 0);
 	glCompileShader(vsId);
-	glGetShaderiv(vsId, GL_COMPILE_STATUS, &status);
-	if (status != GL_TRUE) 
+	glGetShaderiv(vsId, GL_SHADER_SOURCE_LENGTH, &parame);
+	if (parame != GL_TRUE)
 	{
+		
+		glGetShaderiv(vsId, GL_INFO_LOG_LENGTH, &parame);
+		GLchar* strInfoLog = new GLchar[parame + 1];
+		glGetShaderInfoLog(vsId, parame, nullptr, strInfoLog);
+		glDeleteShader(vsId);
+		delete[] strInfoLog;
 		return;
 	}
 
 	fsId = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fsId, 1, &fs, 0);
 	glCompileShader(fsId);
-	glGetShaderiv(fsId, GL_COMPILE_STATUS, &status);
-	if (status != GL_TRUE)
+	glGetShaderiv(fsId, GL_COMPILE_STATUS, &parame);
+	if (parame != GL_TRUE)
 	{
 		return;
 	}
@@ -28,15 +34,14 @@ GLProgram::GLProgram(const GLchar* vs, const GLchar* fs)
 	glAttachShader(m_programId, vsId);
 	glAttachShader(m_programId, fsId);
 	glLinkProgram(m_programId);
-	glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
-	if (status != GL_TRUE)
+	glGetProgramiv(m_programId, GL_LINK_STATUS, &parame);
+	if (parame != GL_TRUE)
 	{
 		return;
 	}
 
 	glDeleteShader(vsId);
 	glDeleteShader(fsId);
-
 
 }
 
@@ -50,5 +55,5 @@ void GLProgram::use()
 
 GLProgram::~GLProgram()
 {
-
+	glDeleteProgram(m_programId);
 }

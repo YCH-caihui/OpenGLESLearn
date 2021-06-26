@@ -5,6 +5,7 @@
 #include "WinGL.h"
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
+#include "GLRenderer.h"
 
 
 
@@ -25,6 +26,8 @@ EGLDisplay m_display;
 
 HWND m_hWnd;
 
+GLRenderer* m_render;
+
 
 
 // 此代码模块中包含的函数的前向声明:
@@ -40,6 +43,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
+	m_render = new GLRenderer();
+	m_render->enter(ID_EFFECT_DEFAULT);
+	m_render->onSurfaceCreate();
 
 	// TODO: 在此处放置代码。
 
@@ -73,10 +79,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			glClearColor(1, 0, 0, 1);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glViewport(0, 0, m_width, m_height);
-			eglSwapBuffers(m_display, m_surface);
+			if (m_render)
+			{
+				m_render->onDrawFrame();
+			}
 		}
 	}
 
@@ -167,6 +173,12 @@ void destoryOpenGLES()
 		m_surface = EGL_NO_SURFACE;
 	}
 
+	if (m_render != nullptr)
+	{
+		delete m_render;
+		m_render = nullptr;
+	}
+
 }
 
 //
@@ -192,6 +204,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	initOpenGLES();
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+	if (m_render) 
+	{
+		m_render->onSurfaceChanged(m_width, m_height);
+	}
 
 	return TRUE;
 }
