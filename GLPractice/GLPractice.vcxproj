@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLEffect.h" />
+    <ClInclude Include="GLEffectBasicDraw.h" />
     <ClInclude Include="GLEffectDefault.h" />
     <ClInclude Include="GLProgram.h" />
     <ClInclude Include="GLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLEffectBasicDraw.cpp" />
     <ClCompile Include="GLProgram.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GLEffectDefault.cpp" />

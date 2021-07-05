@@ -104,7 +104,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
 
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wcex.lpfnWndProc = WndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
@@ -206,7 +206,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 	m_render = new GLRenderer();
-	m_render->enter(ID_EFFECT_DEFAULT);
+	m_render->enter(ID_EFFECT_BASIC_DRAW);
 	m_render->onSurfaceCreate();
 	m_render->onSurfaceChanged(m_width, m_height);
 	

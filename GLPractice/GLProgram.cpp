@@ -57,7 +57,7 @@ attribute GLProgram::getAttribLocation(const char * name)
 
 uniform GLProgram::getUniformLocation(const char* name)
 {
-	return glGetAttribLocation(m_programId, name);
+	return glGetUniformLocation(m_programId, name);
 }
 
 

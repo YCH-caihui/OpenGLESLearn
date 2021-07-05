@@ -2,8 +2,10 @@
 
 #include "GLEffect.h"
 #include "GLEffectDefault.h"
+#include "GLEffectBasicDraw.h"
 
 const int ID_EFFECT_DEFAULT = 1;
+const int ID_EFFECT_BASIC_DRAW = 2;
 
 
 class GLRenderer
