@@ -1,2 +1,0 @@
-C:\Users\Administrator\Documents\Code\MediaCode\OpenGLESLearn\Application\win32\WinGL\Debug\WinGL.exe
-D:\Code\MediaCode\OpenGLESLearn\Application\win32\WinGL\Debug\WinGL.exe
