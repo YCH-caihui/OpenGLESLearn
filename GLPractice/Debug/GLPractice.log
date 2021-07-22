@@ -1,3 +1,2 @@
-﻿  GLEffectBasicDraw.cpp
-C:\Users\Administrator\Documents\Code\MediaCode\OpenGLESLearn\GLPractice\GLEffectBasicDraw.cpp(64,11): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
-  GLPractice.vcxproj -> C:\Users\Administrator\Documents\Code\MediaCode\OpenGLESLearn\Application\win32\WinGL\Debug\GLPractice.lib
+﻿  GLEffectTextureDraw.cpp
+  GLPractice.vcxproj -> D:\Code\MediaCode\OpenGLESLearn\Application\win32\WinGL\Debug\GLPractice.lib

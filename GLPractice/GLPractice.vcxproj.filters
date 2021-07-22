@@ -30,6 +30,9 @@
     <ClInclude Include="GLEffectBasicDraw.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GLEffectTextureDraw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLRenderer.cpp">
@@ -42,6 +45,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GLEffectBasicDraw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLEffectTextureDraw.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
