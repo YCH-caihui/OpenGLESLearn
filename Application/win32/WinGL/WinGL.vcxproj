@@ -73,6 +73,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <PublicIncludeDirectories>$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm;$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm\detail;$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm\etx;$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm\gtc;$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm\gtx;$(LocalDebuggerWorkingDirectory)..\..\..\glm\glm\simd;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <OutDir>$(SolutionDir)..\..\..\..\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\..\..\..\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,14 +91,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)$(Configuration)\include;$(ProjectDir)..\..\..\Math;$(ProjectDir)..\..\..\GLPractice;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\depend\include;$(ProjectDir)..\..\..\Math;$(ProjectDir)..\..\..\GLPractice;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libGLESv2.lib;libEGL.lib;libMaliEmulator.lib;GLPractice.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\$(Configuration);$(SolutionDir)..\..\depend\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(SolutionDir)..\..\..\..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
