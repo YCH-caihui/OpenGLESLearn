@@ -6,6 +6,8 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 #include "GLRenderer.h"
+#include "freeImage/FreeImage.h"
+#include "GLBitmap.h"
 
 
 
@@ -205,9 +207,32 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	initOpenGLES();
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+	/*
 	m_render = new GLRenderer();
 	m_render->enter(ID_EFFECT_BASIC_DRAW);
 	m_render->onSurfaceCreate();
+	m_render->onSurfaceChanged(m_width, m_height);
+	*/
+
+	m_render = new GLRenderer();
+	m_render->enter(ID_EFFECT_TEXTURE_DRAW);
+	m_render->onSurfaceCreate();
+
+	const char* imagPath = "C:\\Users\Administrator\Documents\Code\MediaCode\OpenGLESLearn-build\Debug\data\image\main.jpg";
+	FREE_IMAGE_FORMAT fifmt = FreeImage_GetFileType(imagPath, 0);
+
+	//2 ¼ÓÔØÍ¼Æ¬
+	FIBITMAP* dib = FreeImage_Load(fifmt, imagPath, 0);
+
+	//3 ×ª»¯Îªrgb 24É«
+	dib = FreeImage_ConvertTo24Bits(dib);
+
+	//4 »ñÈ¡Êý¾ÝÖ¸Õë
+	BYTE* pixels = (BYTE*)FreeImage_GetBits(dib);
+
+	int     width = FreeImage_GetWidth(dib);
+	int     height = FreeImage_GetHeight(dib);
+
 	m_render->onSurfaceChanged(m_width, m_height);
 	
 

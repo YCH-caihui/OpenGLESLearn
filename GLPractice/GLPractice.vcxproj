@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GLBitmap.h" />
     <ClInclude Include="GLEffect.h" />
     <ClInclude Include="GLEffectBasicDraw.h" />
     <ClInclude Include="GLEffectDefault.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="GLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLBitmap.cpp" />
     <ClCompile Include="GLEffectBasicDraw.cpp" />
     <ClCompile Include="GLEffectTextureDraw.cpp" />
     <ClCompile Include="GLProgram.cpp" />

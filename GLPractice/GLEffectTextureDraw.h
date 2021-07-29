@@ -1,7 +1,7 @@
 #pragma once
 #include "GLEffect.h"
 
-class GLEffectTextureDraw : GLEffect 
+class GLEffectTextureDraw : public GLEffect 
 {
 
 private:
@@ -14,5 +14,6 @@ public:
 	void init() override;
 	void update(int width, int height) override;
 	void onDraw() override;
+
 
 };

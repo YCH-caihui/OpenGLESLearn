@@ -21,6 +21,9 @@ void GLRenderer::enter(int id)
 		case ID_EFFECT_BASIC_DRAW:
 			m_effect = new GLEffectBasicDraw();
 			break;
+		case ID_EFFECT_TEXTURE_DRAW:
+			m_effect = new GLEffectTextureDraw();
+			break;
 		default:
 			break;
 		}

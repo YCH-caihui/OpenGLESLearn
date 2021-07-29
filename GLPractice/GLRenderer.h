@@ -3,9 +3,12 @@
 #include "GLEffect.h"
 #include "GLEffectDefault.h"
 #include "GLEffectBasicDraw.h"
+#include "GLEffectTextureDraw.h"
 
 const int ID_EFFECT_DEFAULT = 1;
 const int ID_EFFECT_BASIC_DRAW = 2;
+const int ID_EFFECT_TEXTURE_DRAW = 3;
+
 
 
 class GLRenderer

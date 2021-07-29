@@ -97,7 +97,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libGLESv2.lib;libEGL.lib;libMaliEmulator.lib;GLPractice.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libGLESv2.lib;libEGL.lib;libMaliEmulator.lib;GLPractice.lib;FreeImage.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\$(Configuration);$(SolutionDir)..\..\depend\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OutputFile>$(SolutionDir)..\..\..\..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
