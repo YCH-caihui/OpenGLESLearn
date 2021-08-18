@@ -1,28 +1,30 @@
-package com.caihui.alonegleslearn;
+package com.caihui.alonegleslearn.activity;
 
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.caihui.alonegleslearn.GLEngine;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class GLActivity extends AppCompatActivity {
+public abstract class GLActivity extends AppCompatActivity {
 
-    private GLSurfaceView mSurfaceView;
     private GLEngine mEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSurfaceView = new GLSurfaceView(this);
-        mSurfaceView.setEGLContextClientVersion(3);
+        GLSurfaceView surfaceView = new GLSurfaceView(this);
+        surfaceView.setEGLContextClientVersion(3);
 
         mEngine = new GLEngine();
 
+        mEngine.nativeInit(getRendererType());
 
-        mSurfaceView.setRenderer(new GLSurfaceView.Renderer() {
+        surfaceView.setRenderer(new GLSurfaceView.Renderer() {
             @Override
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                 mEngine.onSurfaceCreate();
@@ -39,10 +41,11 @@ public class GLActivity extends AppCompatActivity {
                 mEngine.onDrawFrame();
             }
         });
-        setContentView(mSurfaceView);
+        setContentView(surfaceView);
 
 
     }
 
+    public abstract int getRendererType();
 
 }

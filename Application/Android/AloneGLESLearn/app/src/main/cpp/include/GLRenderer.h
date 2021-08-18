@@ -5,6 +5,7 @@
 #ifndef ALONEGLESLEARN_GLRENDERER_H
 #define ALONEGLESLEARN_GLRENDERER_H
 #include "GLProgram.h"
+#include <GLES3/gl3.h>
 
 class GLRenderer
 {
