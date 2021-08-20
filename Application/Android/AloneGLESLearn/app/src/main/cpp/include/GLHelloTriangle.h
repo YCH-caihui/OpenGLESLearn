@@ -6,6 +6,9 @@
 #define ALONEGLESLEARN_GLHELLOTRIANGLE_H
 #include "GLRenderer.h"
 #include "GLProgram.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 class GLHelloTriangle : public GLRenderer
 {
 private:

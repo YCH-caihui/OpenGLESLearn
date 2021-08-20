@@ -4,7 +4,6 @@
 
 #include "GLHelloTriangle.h"
 
-
 void GLHelloTriangle::onSurfaceCreate() {
     const char *vertexShader =
             {
@@ -30,13 +29,16 @@ void GLHelloTriangle::onSurfaceCreate() {
                     "}                          \n"
             };
 
+
     m_program = new GLProgram(vertexShader, fragmentShader);
     v_position = m_program->getAttribLocation("v_position");
     v_color = m_program->getAttribLocation("v_color");
+
 }
 
 void GLHelloTriangle::onSurfaceChanged(int width, int height) {
     glViewport(0, 0, width, height);
+
 }
 
 
@@ -52,6 +54,7 @@ void GLHelloTriangle::onDrawFrame() {
 
     glEnableVertexAttribArray(v_position);
     glEnableVertexAttribArray(v_color);
+
 
     glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(float ) *  8, triangle);
     glVertexAttribPointer(v_color, 4, GL_FLOAT, GL_FALSE, sizeof(float ) * 8, &triangle[4]);
