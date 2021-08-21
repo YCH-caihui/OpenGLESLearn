@@ -7,7 +7,11 @@
 #include "GLRenderer.h"
 #include "GLProgram.h"
 #include "glm/glm.hpp"
+#include "glm/ext.hpp"
+#include "android/log.h"
 #include "glm/gtc/matrix_transform.hpp"
+
+#define TAG "GLHelloTriangle"
 
 class GLHelloTriangle : public GLRenderer
 {
@@ -15,6 +19,9 @@ private:
     GLProgram * m_program;
     attribute  v_position;
     attribute  v_color;
+    uniform  v_mvp;
+    int m_width;
+    int m_height;
 public:
      void onSurfaceCreate() override;
      void onSurfaceChanged(int width, int height) override;

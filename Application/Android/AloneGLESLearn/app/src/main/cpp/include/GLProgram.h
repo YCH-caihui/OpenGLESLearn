@@ -24,7 +24,11 @@ public:
 
     attribute getAttribLocation(const GLchar * name);
 
-    uniform  glUniformLocation(const char * name);
+    uniform  getUniformLocation(const char * name);
+
+    void  getActiveUniforms(GLint * params);
+
+    void getActiveUniformMaxLength(GLint * params);
 
     ~GLProgram();
 };

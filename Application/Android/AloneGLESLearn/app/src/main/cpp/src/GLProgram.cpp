@@ -71,9 +71,20 @@ attribute GLProgram::getAttribLocation(const GLchar *name)
     return glGetAttribLocation(m_programId, name);
 }
 
-uniform GLProgram::glUniformLocation(const char *name)
+uniform GLProgram::getUniformLocation(const char *name)
 {
     return glGetUniformLocation(m_programId, name);
+}
+
+
+void  GLProgram::getActiveUniforms(GLint * params)
+{
+    glGetProgramiv(m_programId, GL_ACTIVE_UNIFORMS, params );
+}
+
+void GLProgram::getActiveUniformMaxLength(GLint * params)
+{
+    glGetProgramiv(m_programId, GL_ACTIVE_UNIFORM_MAX_LENGTH, params);
 }
 
 GLProgram::~GLProgram()
