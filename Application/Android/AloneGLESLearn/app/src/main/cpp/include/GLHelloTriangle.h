@@ -6,10 +6,7 @@
 #define ALONEGLESLEARN_GLHELLOTRIANGLE_H
 #include "GLRenderer.h"
 #include "GLProgram.h"
-#include "glm/glm.hpp"
-#include "glm/ext.hpp"
-#include "android/log.h"
-#include "glm/gtc/matrix_transform.hpp"
+
 
 #define TAG "GLHelloTriangle"
 

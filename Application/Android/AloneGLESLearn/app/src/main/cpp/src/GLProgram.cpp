@@ -60,6 +60,15 @@ GLProgram::GLProgram(const GLchar * vertexShaderSource, const GLchar * fragmentS
     glDeleteShader(fragmentShaderId);
 }
 
+GLuint GLProgram::glGetUniformBlockIndex(const GLchar *uniformBlockName)
+{
+   return ::glGetUniformBlockIndex(m_programId, uniformBlockName);
+}
+
+void GLProgram::glUniformBlockBinding(GLuint blockIndex, GLuint uBlockBinding)
+{
+    return ::glUniformBlockBinding(m_programId, blockIndex, uBlockBinding);
+}
 
 void GLProgram::useToRenderer()
 {

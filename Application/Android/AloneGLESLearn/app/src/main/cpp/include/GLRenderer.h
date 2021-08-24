@@ -6,6 +6,10 @@
 #define ALONEGLESLEARN_GLRENDERER_H
 #include "GLProgram.h"
 #include <GLES3/gl3.h>
+#include "glm/glm.hpp"
+#include "glm/ext.hpp"
+#include "android/log.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 class GLRenderer
 {

@@ -3,9 +3,11 @@
 #include <android/log.h>
 #include "GLRenderer.h"
 #include "GLHelloTriangle.h"
+#include "GLUbo.h"
+
 
  static const int RENDERER_TYPE_HELLO_TRIANGLE = 100;
-
+ static const int RENDERER_TYPE_UBO = 101;
 
 GLRenderer * glRenderer = nullptr;
 
@@ -13,6 +15,8 @@ GLRenderer * glRenderer = nullptr;
 void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
     if (rendererType == RENDERER_TYPE_HELLO_TRIANGLE) {
         glRenderer = new GLHelloTriangle();
+    } else if(rendererType == RENDERER_TYPE_UBO) {
+        glRenderer = new GLUbo();
     }
 }
 

@@ -42,7 +42,6 @@ void GLHelloTriangle::onSurfaceChanged(int width, int height) {
     m_width = width;
     m_height = height;
     glViewport(0, 0, width, height);
-
 }
 
 
@@ -85,14 +84,11 @@ void GLHelloTriangle::onDrawFrame() {
 
     glEnableVertexAttribArray(v_position);
     glEnableVertexAttribArray(v_color);
-    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(float ) *  8, triangleA);
+    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(float) *  8, triangleA);
     glVertexAttribPointer(v_color, 4, GL_FLOAT, GL_FALSE, sizeof(float ) * 8, &triangleA[4]);
     glDrawArrays(GL_TRIANGLES, 0, 3 );
     glDisableVertexAttribArray(v_position);
     glDisableVertexAttribArray(v_color);
-
-
-
 
 
 }

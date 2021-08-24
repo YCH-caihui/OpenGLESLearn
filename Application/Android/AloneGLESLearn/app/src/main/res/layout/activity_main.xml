@@ -12,4 +12,9 @@
         android:layout_height="wrap_content"
         android:text="hello_triangle"/>
 
+    <Button
+        android:id="@+id/bt_ubo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ubo"/>
 </LinearLayout>

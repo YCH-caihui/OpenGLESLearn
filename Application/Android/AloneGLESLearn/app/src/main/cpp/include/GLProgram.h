@@ -28,6 +28,9 @@ public:
 
     void  getActiveUniforms(GLint * params);
 
+    GLuint  glGetUniformBlockIndex(const GLchar * uniformBlockName);
+    void glUniformBlockBinding(GLuint blockIndex, GLuint uBlockBinding);
+
     void getActiveUniformMaxLength(GLint * params);
 
     ~GLProgram();
