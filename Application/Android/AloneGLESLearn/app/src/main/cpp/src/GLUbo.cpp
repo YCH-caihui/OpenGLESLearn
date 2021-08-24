@@ -36,7 +36,6 @@ void GLUbo::onSurfaceCreate()
             "}                         \n"
     };
     m_program = new GLProgram(vertexShader, fragmentShader);
-    glGetUniformBlockIndex(    )
 
 }
 
