@@ -12,6 +12,10 @@ class GLUbo : public GLRenderer
 {
 private:
     GLProgram * m_program;
+    uniform m_blockIndex;
+    uniform m_blockPoint = 1;
+    attribute  v_position;
+    attribute  v_color;
 public:
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
