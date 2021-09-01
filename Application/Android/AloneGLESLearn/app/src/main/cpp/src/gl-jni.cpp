@@ -4,10 +4,12 @@
 #include "GLRenderer.h"
 #include "GLHelloTriangle.h"
 #include "GLUbo.h"
+#include "GLTexture.h"
 
 
  static const int RENDERER_TYPE_HELLO_TRIANGLE = 100;
  static const int RENDERER_TYPE_UBO = 101;
+ static const int RENDERER_TYPE_TEXTURE = 102;
 
 GLRenderer * glRenderer = nullptr;
 
@@ -17,6 +19,8 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
         glRenderer = new GLHelloTriangle();
     } else if(rendererType == RENDERER_TYPE_UBO) {
         glRenderer = new GLUbo();
+    } else if(rendererType == RENDERER_TYPE_TEXTURE) {
+        glRenderer = new GLTexture();
     }
 }
 

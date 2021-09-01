@@ -17,4 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ubo"/>
+
+    <Button
+        android:id="@+id/bt_texture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="texture"/>
 </LinearLayout>

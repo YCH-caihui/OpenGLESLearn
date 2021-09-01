@@ -41,14 +41,17 @@ void GLUbo::onSurfaceCreate()
 
    v_position = m_program->getAttribLocation("v_position");
    v_color = m_program->getAttribLocation("v_color");
+   int maxVertexUniform, maxFragmentUniform;
+   glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &maxVertexUniform);
+   glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, &maxFragmentUniform);
 
-
+   __android_log_print(ANDROID_LOG_DEBUG, "GLUbo", "gl_max_vertex_uniform_components:%d  gl_max_fragment_uniform_components:%d", maxVertexUniform, maxFragmentUniform);
 
 }
 
 void GLUbo::onSurfaceChanged(int width, int height)
 {
-    m_program->useToRenderer();
+
     glm::mat4  proj = glm::ortho(0.0f, (float)width, (float)height, 0.0f, 1.0f, -1.0f);
     m_blockIndex = m_program->glGetUniformBlockIndex("MatrixBlock");
     m_program->glUniformBlockBinding(m_blockIndex, m_blockPoint);
@@ -75,6 +78,7 @@ void GLUbo::onSurfaceChanged(int width, int height)
 
 void GLUbo::onDrawFrame()
 {
+    m_program->useToRenderer();
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 

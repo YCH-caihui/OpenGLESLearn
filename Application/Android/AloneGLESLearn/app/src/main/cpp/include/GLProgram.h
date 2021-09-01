@@ -11,6 +11,7 @@
 
 typedef GLint attribute;
 typedef GLint uniform;
+typedef GLuint * bufferId;
 
 class GLProgram
 {
