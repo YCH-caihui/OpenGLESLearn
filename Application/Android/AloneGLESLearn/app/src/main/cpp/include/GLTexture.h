@@ -8,6 +8,12 @@
 #include "GLRenderer.h"
 #include "GLProgram.h"
 
+struct Vertex
+{
+    glm::vec4  position;
+    glm::vec2  coord;
+};
+
 class GLTexture : public GLRenderer
 {
 private:
@@ -15,6 +21,7 @@ private:
     attribute v_position;
     attribute v_texCoord;
     bufferId  m_uniform_bufferId;
+    textureId m_textureIds;
 
 public:
     void onSurfaceCreate() override;

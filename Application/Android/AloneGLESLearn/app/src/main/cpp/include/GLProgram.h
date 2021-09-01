@@ -12,6 +12,7 @@
 typedef GLint attribute;
 typedef GLint uniform;
 typedef GLuint * bufferId;
+typedef GLuint * textureId;
 
 class GLProgram
 {

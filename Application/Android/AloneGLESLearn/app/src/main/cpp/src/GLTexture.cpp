@@ -32,13 +32,23 @@ void GLTexture::onSurfaceCreate()
             "uniform sampler2D f_texture;     \n"
             "void main()                      \n"
             "{                                \n"
-            "  out_color = texture(f_texture, f_texCoord);  \n"
+            "  out_color = vec4(1.0f, 1.0f, 0.0f , 1.0f);  \n"
             "}                                \n"
     };
 
     m_program = new GLProgram(vs, fs);
     v_position = m_program->getAttribLocation("v_position");
     v_texCoord = m_program->getAttribLocation("v_texCoord");
+
+    m_textureIds = new GLuint[1]();
+    glGenTextures(1, m_textureIds);
+    glBindTexture(GL_TEXTURE_2D, m_textureIds[0]);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D,GL_NONE);
+
 
 
 }
@@ -61,5 +71,26 @@ void GLTexture::onSurfaceChanged(int width, int height)
 
 void GLTexture::onDrawFrame()
 {
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(1.0, 1.0f, 1.0f, 1.0f);
+    m_program->useToRenderer();
+
+    Vertex  vertex[] =
+     {
+            glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f),
+            glm::vec4(0.0f, 500.0f, 0.0f, 1.0f), glm::vec2(0.0f , 1.0f),
+            glm::vec4(500.0f, 500.0f, 0.0f , 1.0f), glm::vec2(1.0f, 1.0f),
+            glm::vec4(500.0f, 0.0f, 0.0f , 1.0f), glm::vec2(1.0, 0.0f)
+     };
+
+    glEnableVertexAttribArray(v_position);
+    glEnableVertexAttribArray(v_texCoord);
+    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), vertex);
+    glVertexAttribPointer(v_texCoord, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), &vertex[0].coord);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(v_texCoord);
+    glDisableVertexAttribArray(v_position);
+
 
 }
