@@ -18,7 +18,7 @@ void GLTexture::onSurfaceCreate()
             "out vec2 f_texCoord;                \n"
             "void main()                         \n"
             "{                                   \n"
-            "   gl_Position = v_position;        \n"
+            "   gl_Position = matrices.projection * v_position;        \n"
             "   f_texCoord = v_texCoord;         \n"
             "}                                   \n"
     };
@@ -56,7 +56,8 @@ void GLTexture::onSurfaceCreate()
 
 void GLTexture::onSurfaceChanged(int width, int height)
 {
-    glm::mat4  proj = glm::ortho(0, width, height, 0);
+    m_program->useToRenderer();
+    glm::mat4  proj = glm::ortho(0.0f, (float)width, (float)height, 0.0f, 1.0f, -1.0f);
     int blockIndex = m_program->glGetUniformBlockIndex("MatrixBlock");
     GLuint blockPoint = 0;
     m_program->glUniformBlockBinding(blockIndex, blockPoint);
@@ -73,20 +74,21 @@ void GLTexture::onDrawFrame()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(1.0, 1.0f, 1.0f, 1.0f);
-    m_program->useToRenderer();
+
 
     Vertex  vertex[] =
      {
-            glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f),
+
             glm::vec4(0.0f, 500.0f, 0.0f, 1.0f), glm::vec2(0.0f , 1.0f),
             glm::vec4(500.0f, 500.0f, 0.0f , 1.0f), glm::vec2(1.0f, 1.0f),
+            glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f),
             glm::vec4(500.0f, 0.0f, 0.0f , 1.0f), glm::vec2(1.0, 0.0f)
      };
 
     glEnableVertexAttribArray(v_position);
     glEnableVertexAttribArray(v_texCoord);
-    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), vertex);
-    glVertexAttribPointer(v_texCoord, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), &vertex[0].coord);
+    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), vertex);
+    glVertexAttribPointer(v_texCoord, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), &vertex[0].coord);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     glDisableVertexAttribArray(v_texCoord);
