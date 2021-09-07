@@ -10,6 +10,15 @@
 #include "glm/ext.hpp"
 #include "android/log.h"
 #include "glm/gtc/matrix_transform.hpp"
+#include "android/bitmap.h"
+
+
+struct XBitmap
+{
+    AndroidBitmapInfo * info;
+    void * addrPtr;
+};
+
 
 class GLRenderer
 {

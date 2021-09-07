@@ -1,5 +1,6 @@
 package com.caihui.alonegleslearn.activity;
 
+import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
@@ -12,7 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public abstract class GLActivity extends AppCompatActivity {
 
-    private GLEngine mEngine;
+    public GLEngine mEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,10 @@ public abstract class GLActivity extends AppCompatActivity {
             @Override
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                 mEngine.onSurfaceCreate();
+                Bitmap bitmap = getBitmap();
+                if(bitmap != null) {
+                    mEngine.setBitmapToNative(bitmap);
+                }
 
             }
 
@@ -47,5 +52,9 @@ public abstract class GLActivity extends AppCompatActivity {
     }
 
     public abstract int getRendererType();
+
+    protected Bitmap getBitmap() {
+        return null;
+    }
 
 }

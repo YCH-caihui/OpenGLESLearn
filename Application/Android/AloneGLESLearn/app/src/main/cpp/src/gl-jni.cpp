@@ -6,6 +6,8 @@
 #include "GLUbo.h"
 #include "GLTexture.h"
 
+#include "android/bitmap.h"
+
 
  static const int RENDERER_TYPE_HELLO_TRIANGLE = 100;
  static const int RENDERER_TYPE_UBO = 101;
@@ -22,6 +24,23 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
     } else if(rendererType == RENDERER_TYPE_TEXTURE) {
         glRenderer = new GLTexture();
     }
+}
+
+void setBitmapToNative(JNIEnv *env, jobject object , jobject jBitmap) {
+    auto * info = new AndroidBitmapInfo();
+  AndroidBitmap_getInfo(env, jBitmap, info);
+  __android_log_print(ANDROID_LOG_DEBUG, "caihui", "width: %d , height: %d   stride:%d  format: %d", info->width, info->height, info->stride, info->format);
+
+  void * addrPtr = nullptr;
+  AndroidBitmap_lockPixels(env, jBitmap, (void **)&addrPtr);
+
+  auto * xBitmap = new XBitmap();
+  xBitmap->info = info;
+  xBitmap->addrPtr = addrPtr;
+
+  AndroidBitmap_unlockPixels(env, jBitmap);
+
+
 }
 
 
@@ -48,7 +67,8 @@ static const JNINativeMethod nativeMethod[] = {
         "nativeInit", "(I)V", (void *) (nativeInit),
         "onSurfaceCreate", "()V", (void *) (onSurfaceCreate),
         "onSurfaceChanged", "(II)V", (void *) (onSurfaceChanged),
-        "onDrawFrame", "()V", (void *) (onDrawFrame)
+        "onDrawFrame", "()V", (void *) (onDrawFrame),
+        "setBitmapToNative","(Landroid/graphics/Bitmap;)V", (void *)(setBitmapToNative)
 
 };
 

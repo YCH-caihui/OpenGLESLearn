@@ -12,4 +12,4 @@ add_library(GLEngine-lib SHARED ${native_srcs} )
 
 find_library(log-lib log )
 
-target_link_libraries(GLEngine-lib  ${log-lib} android EGL GLESv3 m)
+target_link_libraries(GLEngine-lib  ${log-lib} android EGL GLESv3 m jnigraphics)
