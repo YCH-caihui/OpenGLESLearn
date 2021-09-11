@@ -22,9 +22,11 @@ private:
     attribute v_texCoord;
     bufferId  m_uniform_bufferId;
     textureId m_textureIds;
+    uniform  f_texture;
 
 public:
     void onSurfaceCreate() override;
+    void setBitmap(XBitmap * bitmap) override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
 

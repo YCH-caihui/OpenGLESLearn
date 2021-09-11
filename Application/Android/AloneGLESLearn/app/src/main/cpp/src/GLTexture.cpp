@@ -32,13 +32,14 @@ void GLTexture::onSurfaceCreate()
             "uniform sampler2D f_texture;     \n"
             "void main()                      \n"
             "{                                \n"
-            "  out_color = vec4(1.0f, 1.0f, 0.0f , 1.0f);  \n"
+            "  out_color = texture(f_texture, f_texCoord);  \n"
             "}                                \n"
     };
 
     m_program = new GLProgram(vs, fs);
     v_position = m_program->getAttribLocation("v_position");
     v_texCoord = m_program->getAttribLocation("v_texCoord");
+    f_texture = m_program->getUniformLocation("f_texture");
 
     m_textureIds = new GLuint[1]();
     glGenTextures(1, m_textureIds);
@@ -69,6 +70,12 @@ void GLTexture::onSurfaceChanged(int width, int height)
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
+void GLTexture::setBitmap(XBitmap *bitmap) {
+    __android_log_print(ANDROID_LOG_DEBUG, "ccc",  "===width:%d  height:%d format :%d" ,bitmap->info->width, bitmap->info->height, bitmap->info->format);
+    glBindTexture(GL_TEXTURE_2D, m_textureIds[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bitmap->info->width, bitmap->info->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->addrPtr);
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
+}
 
 void GLTexture::onDrawFrame()
 {
@@ -84,6 +91,11 @@ void GLTexture::onDrawFrame()
             glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f),
             glm::vec4(500.0f, 0.0f, 0.0f , 1.0f), glm::vec2(1.0, 0.0f)
      };
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_textureIds[0]);
+    glUniform1i(GL_TEXTURE_2D, m_textureIds[0]);
+
 
     glEnableVertexAttribArray(v_position);
     glEnableVertexAttribArray(v_texCoord);

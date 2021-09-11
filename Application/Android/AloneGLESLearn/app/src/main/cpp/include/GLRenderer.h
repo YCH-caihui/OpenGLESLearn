@@ -25,6 +25,11 @@ class GLRenderer
 
 public:
    virtual void onSurfaceCreate() = 0;
+
+   virtual void setBitmap(XBitmap * bitmap) {
+
+   }
+
    virtual void onSurfaceChanged(int width, int height) = 0;
    virtual void onDrawFrame() = 0;
 };

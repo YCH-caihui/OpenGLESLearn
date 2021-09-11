@@ -31,13 +31,13 @@ void setBitmapToNative(JNIEnv *env, jobject object , jobject jBitmap) {
   AndroidBitmap_getInfo(env, jBitmap, info);
   __android_log_print(ANDROID_LOG_DEBUG, "caihui", "width: %d , height: %d   stride:%d  format: %d", info->width, info->height, info->stride, info->format);
 
-  void * addrPtr = nullptr;
+  unsigned char * addrPtr = nullptr;
   AndroidBitmap_lockPixels(env, jBitmap, (void **)&addrPtr);
 
   auto * xBitmap = new XBitmap();
   xBitmap->info = info;
   xBitmap->addrPtr = addrPtr;
-
+  glRenderer->setBitmap(xBitmap);
   AndroidBitmap_unlockPixels(env, jBitmap);
 
 
