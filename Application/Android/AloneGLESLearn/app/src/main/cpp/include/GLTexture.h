@@ -23,6 +23,8 @@ private:
     bufferId  m_uniform_bufferId;
     textureId m_textureIds;
     uniform  f_texture;
+    int m_width;
+    int m_height;
 
 public:
     void onSurfaceCreate() override;

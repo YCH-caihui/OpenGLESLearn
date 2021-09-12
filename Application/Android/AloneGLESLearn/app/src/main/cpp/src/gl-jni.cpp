@@ -39,6 +39,9 @@ void setBitmapToNative(JNIEnv *env, jobject object , jobject jBitmap) {
   xBitmap->addrPtr = addrPtr;
   glRenderer->setBitmap(xBitmap);
   AndroidBitmap_unlockPixels(env, jBitmap);
+  delete info;
+  free(addrPtr);
+  delete xBitmap;
 
 
 }

@@ -29,10 +29,18 @@ void GLTexture::onSurfaceCreate()
             "precision mediump float;         \n"
             "in vec2 f_texCoord;              \n"
             "out vec4 out_color;              \n"
+            "//RGB 的变换因子，即权重值            \n"
+            "const highp vec3  W = vec3(0.2125, 0.7154, 0.0721);      \n"
             "uniform sampler2D f_texture;     \n"
             "void main()                      \n"
             "{                                \n"
-            "  out_color = texture(f_texture, f_texCoord);  \n"
+            "//获取对应纹理坐标系下颜色值  \n"
+            "  vec4 mask = texture(f_texture, f_texCoord);  \n"
+            "//将颜色mask 与变换因子想乘得到灰度值                \n"
+            "float luminance = dot(mask.rgb, W);             \n"
+            "//将灰度转换为（luminance, luminance, luminance.mask.a）并填充到像素中  \n"
+            "out_color    = vec4(vec3(luminance), 1.0f);          \n"
+
             "}                                \n"
     };
 
@@ -57,6 +65,8 @@ void GLTexture::onSurfaceCreate()
 
 void GLTexture::onSurfaceChanged(int width, int height)
 {
+    m_width = width;
+    m_height = height;
     m_program->useToRenderer();
     glm::mat4  proj = glm::ortho(0.0f, (float)width, (float)height, 0.0f, 1.0f, -1.0f);
     int blockIndex = m_program->glGetUniformBlockIndex("MatrixBlock");
@@ -86,10 +96,10 @@ void GLTexture::onDrawFrame()
     Vertex  vertex[] =
      {
 
-            glm::vec4(0.0f, 500.0f, 0.0f, 1.0f), glm::vec2(0.0f , 1.0f),
-            glm::vec4(500.0f, 500.0f, 0.0f , 1.0f), glm::vec2(1.0f, 1.0f),
+            glm::vec4(0.0f,  m_height, 0.0f, 1.0f), glm::vec2(0.0f , 1.0f),
+            glm::vec4(m_width, m_height, 0.0f , 1.0f), glm::vec2(1.0f, 1.0f),
             glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f),
-            glm::vec4(500.0f, 0.0f, 0.0f , 1.0f), glm::vec2(1.0, 0.0f)
+            glm::vec4(m_width, 0.0f, 0.0f , 1.0f), glm::vec2(1.0, 0.0f)
      };
 
     glActiveTexture(GL_TEXTURE0);
