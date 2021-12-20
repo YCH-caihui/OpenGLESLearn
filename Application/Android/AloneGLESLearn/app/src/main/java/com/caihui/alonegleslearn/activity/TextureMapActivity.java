@@ -6,11 +6,11 @@ import android.graphics.BitmapFactory;
 import com.caihui.alonegleslearn.GLEngine;
 import com.caihui.alonegleslearn.R;
 
-public class TextureActivity extends GLActivity{
+public class TextureMapActivity extends GLActivity{
 
     @Override
     public int getRendererType() {
-        return GLEngine.RENDERER_TYPE_TEXTURE;
+        return GLEngine.RENDERER_TYPE_TEXTURE_MAP;
     }
 
     @Override

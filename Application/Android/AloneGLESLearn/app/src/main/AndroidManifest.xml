@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activity.HelloTriangleActivity"/>
         <activity android:name=".activity.UboActivity"/>
-        <activity android:name=".activity.TextureActivity"/>
+        <activity android:name=".activity.TextureMapActivity"/>
     </application>
 
 </manifest>

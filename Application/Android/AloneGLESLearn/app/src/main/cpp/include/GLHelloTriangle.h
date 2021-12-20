@@ -8,8 +8,6 @@
 #include "GLProgram.h"
 
 
-#define TAG "GLHelloTriangle"
-
 class GLHelloTriangle : public GLRenderer
 {
 private:

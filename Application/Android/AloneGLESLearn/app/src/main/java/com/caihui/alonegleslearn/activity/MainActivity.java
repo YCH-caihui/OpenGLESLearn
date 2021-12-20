@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViewById(R.id.bt_hello_triangle).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, HelloTriangleActivity.class)));
         findViewById(R.id.bt_ubo).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UboActivity.class)));
-        findViewById(R.id.bt_texture).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TextureActivity.class)));
+        findViewById(R.id.bt_texture).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TextureMapActivity.class)));
 
     }
 }
