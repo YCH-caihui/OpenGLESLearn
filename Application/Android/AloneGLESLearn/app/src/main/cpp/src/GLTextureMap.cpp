@@ -6,12 +6,9 @@
 
 void GLTextureMap::onSurfaceCreate()
 {
-
-
     m_program = new GLProgram(vs, fs);
     a_position =  m_program->getAttribLocation("a_position");
     a_texCoordinate = m_program->getAttribLocation("a_texCoordinate");
-    v_texCoordinate = m_program->getAttribLocation("v_texCoordinate");
     s_textureLocation = m_program->getUniformLocation("s_TextureMap");
 
     glGenTextures(1, &m_textureId);
@@ -42,12 +39,9 @@ void GLTextureMap::onDrawFrame()
     glClearColor(0.4, 0.4, 0.4, 1.0);
 
     m_program->useToRenderer();
-
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_textureId);
-    glUniform1i(GL_TEXTURE_2D, 0);
-
-
+    glUniform1i(s_textureLocation, GL_TEXTURE0);
 
     glEnableVertexAttribArray(a_position);
     glEnableVertexAttribArray(a_texCoordinate);
@@ -56,6 +50,4 @@ void GLTextureMap::onDrawFrame()
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glDisableVertexAttribArray(a_position);
     glDisableVertexAttribArray(a_texCoordinate);
-
-
 }
