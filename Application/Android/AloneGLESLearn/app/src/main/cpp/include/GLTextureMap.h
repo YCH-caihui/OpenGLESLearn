@@ -50,7 +50,6 @@ private:
     GLProgram * m_program;
     attribute a_position;
     attribute a_texCoordinate;
-    attribute v_texCoordinate;
     uniform  s_textureLocation;
 
     GLuint  m_textureId;
@@ -74,7 +73,12 @@ public:
     void onDrawFrame() override;
 
     ~GLTextureMap() {
-        delete[] m_rect;
+        if(m_rect != nullptr) {
+            delete[] m_rect;
+            m_rect = nullptr;
+        }
+
+        glDeleteTextures(1, &m_textureId);
     }
 
 };

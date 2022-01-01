@@ -17,6 +17,10 @@ GLRenderer * glRenderer = nullptr;
 
 
 void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
+
+    if(glRenderer != nullptr) {
+        delete glRenderer;
+    }
     if (rendererType == RENDERER_TYPE_HELLO_TRIANGLE) {
         glRenderer = new GLHelloTriangle();
     } else if(rendererType == RENDERER_TYPE_UBO) {

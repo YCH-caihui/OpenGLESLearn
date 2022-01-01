@@ -30,6 +30,8 @@ public:
 
    }
 
+   virtual ~GLRenderer() {}
+
    virtual void onSurfaceChanged(int width, int height) = 0;
    virtual void onDrawFrame() = 0;
 };
