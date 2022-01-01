@@ -6,48 +6,56 @@
 
 void GLTextureMap::onSurfaceCreate()
 {
-    const char * vs = {
-            "#version 300 es            \n"
-            "layout(location = 0) in vec4 a_position;  \n"
-            "layout(location = 1) in vec2 a_texCoordinate;   \n"
-            "out vec2 v_texCoordinate;                        \n"
-            "void main()                                      \n"
-            "{                                                \n"
-            "  gl_Position = a_position;                      \n"
-            "  v_texCoordinate  = a_texCoordinate;            \n"
-            "}                                               \n"
-    };
 
-
-    const char * fs = {
-            "#version 300 es                           \n"
-            "precision mediump float;                   \n"
-            "in vec2 v_texCoordinate;                    \n"
-            "uniform sampler2D s_TextureMap;            \n"
-            "layout(location = 0) out vec4 outColor;    \n"
-            "void main()                                \n"
-            "{                                          \n"
-            " outColor = texture(s_TextureMap, v_texCoordinate);    \n "
-            "}                                                      \n"
-    };
 
     m_program = new GLProgram(vs, fs);
+    a_position =  m_program->getAttribLocation("a_position");
+    a_texCoordinate = m_program->getAttribLocation("a_texCoordinate");
+    v_texCoordinate = m_program->getAttribLocation("v_texCoordinate");
+    s_textureLocation = m_program->getUniformLocation("s_TextureMap");
 
+    glGenTextures(1, &m_textureId);
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
 }
 
 
 void GLTextureMap::onSurfaceChanged(int width, int height)
 {
+    glViewport(0, 0, width, height);
 }
 
 void GLTextureMap::setBitmap(XBitmap *bitmap) {
-
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bitmap->info->width, bitmap->info->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->addrPtr);
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
 }
 
 void GLTextureMap::onDrawFrame()
 {
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClearColor(0.4, 0.4, 0.4, 1.0);
 
+    m_program->useToRenderer();
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glUniform1i(GL_TEXTURE_2D, 0);
+
+
+
+    glEnableVertexAttribArray(a_position);
+    glEnableVertexAttribArray(a_texCoordinate);
+    glVertexAttribPointer(a_position, 4, GL_FLOAT, GL_FALSE, sizeof(Rect), m_rect);
+    glVertexAttribPointer(a_texCoordinate, 2, GL_FLOAT, GL_FALSE, sizeof(Rect), &m_rect[0].texCoordinate);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glDisableVertexAttribArray(a_position);
+    glDisableVertexAttribArray(a_texCoordinate);
 
 
 }
