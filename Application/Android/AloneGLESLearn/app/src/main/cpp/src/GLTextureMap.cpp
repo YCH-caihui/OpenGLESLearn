@@ -39,9 +39,9 @@ void GLTextureMap::onDrawFrame()
     glClearColor(0.4, 0.4, 0.4, 1.0);
 
     m_program->useToRenderer();
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE31);
     glBindTexture(GL_TEXTURE_2D, m_textureId);
-    glUniform1i(s_textureLocation, GL_TEXTURE0);
+    glUniform1i(s_textureLocation, 31);
 
     glEnableVertexAttribArray(a_position);
     glEnableVertexAttribArray(a_texCoordinate);
