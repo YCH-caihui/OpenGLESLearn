@@ -5,6 +5,7 @@
 #include "GLHelloTriangle.h"
 #include "GLUbo.h"
 #include "GLTextureMap.h"
+#include "GLYuvMap.h"
 
 #include "android/bitmap.h"
 
@@ -12,6 +13,7 @@
  static const int RENDERER_TYPE_HELLO_TRIANGLE = 100;
  static const int RENDERER_TYPE_UBO = 101;
  static const int RENDERER_TYPE_TEXTURE_MAP = 102;
+ static const int RENDERER_TYPE_YUV_MAP = 103;
 
 GLRenderer * glRenderer = nullptr;
 
@@ -27,6 +29,8 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
         glRenderer = new GLUbo();
     } else if(rendererType == RENDERER_TYPE_TEXTURE_MAP) {
         glRenderer = new GLTextureMap();
+    } else if(rendererType == RENDERER_TYPE_YUV_MAP) {
+        glRenderer = new GLYuvMap();
     }
 }
 
@@ -46,8 +50,6 @@ void setBitmapToNative(JNIEnv *env, jobject object , jobject jBitmap) {
   delete info;
   free(addrPtr);
   delete xBitmap;
-
-
 }
 
 
