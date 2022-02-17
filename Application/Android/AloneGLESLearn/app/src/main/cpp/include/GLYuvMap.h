@@ -7,6 +7,8 @@
 
 #include "GLRenderer.h"
 #include "GLProgram.h"
+#include "NativeImage.h"
+#include "NativeImage.h"
 
 
 struct YUVRect {

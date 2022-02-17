@@ -19,6 +19,11 @@ struct XBitmap
     void * addrPtr;
 };
 
+struct XNativeImage
+{
+
+};
+
 
 class GLRenderer
 {
