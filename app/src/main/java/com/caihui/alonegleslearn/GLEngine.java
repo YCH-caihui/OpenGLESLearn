@@ -10,6 +10,15 @@ public class GLEngine {
     public static final int RENDERER_TYPE_TEXTURE_MAP = 102;
     public static final int RENDERER_TYPE_YUV_MAP = 103;
 
+
+
+    public static final int IMAGE_FORMAT_RGBA = 0x01;
+    public static final int IMAGE_FORMAT_NV21 = 0x02;
+    public static final int IMAGE_FORMAT_NV12 = 0x03;
+    public static final int IMAGE_FORMAT_I420 = 0x04;
+    public static final int IMAGE_FORMAT_YUYV = 0x05;
+    public static final int IMAGE_FORMAT_GARY = 0x06;
+
     static {
         System.loadLibrary("GLEngine-lib");
     }
@@ -20,9 +29,11 @@ public class GLEngine {
     }
 
 
+
+
     public native void nativeInit(int renderType);
     public native void onSurfaceCreate();
-    public native void setBitmapToNative(Bitmap bitmap);
+    public native void setNativeImage(int format, int width, int height, byte[] bytes);
     public native void onSurfaceChanged(int width, int height);
     public native void onDrawFrame();
 

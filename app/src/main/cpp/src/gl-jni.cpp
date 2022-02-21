@@ -34,24 +34,15 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
     }
 }
 
-void setBitmapToNative(JNIEnv *env, jobject object , jobject jBitmap) {
-    auto * info = new AndroidBitmapInfo();
-  AndroidBitmap_getInfo(env, jBitmap, info);
-  __android_log_print(ANDROID_LOG_DEBUG, "caihui", "width: %d , height: %d   stride:%d  format: %d", info->width, info->height, info->stride, info->format);
 
-  unsigned char * addrPtr = nullptr;
-  AndroidBitmap_lockPixels(env, jBitmap, (void **)&addrPtr);
+void setNativeImage(JNIEnv * env, jobject object, jint format, jint width, jint height, jbyteArray byteArray) {
+    int length =  env->GetArrayLength(byteArray);
+    auto * buf = new u_int8_t[length];
+    env->GetByteArrayRegion(byteArray, 0, length, reinterpret_cast<jbyte *>(buf) );
+    glRenderer->setNativeImage(format, width, height, buf);
+    env->DeleteLocalRef(byteArray);
 
-  auto * xBitmap = new XBitmap();
-  xBitmap->info = info;
-  xBitmap->addrPtr = addrPtr;
-  glRenderer->setBitmap(xBitmap);
-  AndroidBitmap_unlockPixels(env, jBitmap);
-  delete info;
-  free(addrPtr);
-  delete xBitmap;
 }
-
 
 void onSurfaceCreate(JNIEnv *env, jobject object) {
     if (glRenderer) {
@@ -77,7 +68,7 @@ static const JNINativeMethod nativeMethod[] = {
         "onSurfaceCreate", "()V", (void *) (onSurfaceCreate),
         "onSurfaceChanged", "(II)V", (void *) (onSurfaceChanged),
         "onDrawFrame", "()V", (void *) (onDrawFrame),
-        "setBitmapToNative","(Landroid/graphics/Bitmap;)V", (void *)(setBitmapToNative)
+        "setNativeImage", "(III[B)V",(void *)setNativeImage,
 
 };
 

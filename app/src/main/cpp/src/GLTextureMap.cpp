@@ -33,6 +33,14 @@ void GLTextureMap::setBitmap(XBitmap *bitmap) {
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 }
 
+void GLTextureMap::setNativeImage(int format, int width, int height, uint8_t *pData)
+{
+    GLRenderer::setNativeImage(format, width, height, pData);
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
+    glBindTexture(GL_TEXTURE_2D, GL_NONE);
+}
+
 void GLTextureMap::onDrawFrame()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);

@@ -6,12 +6,12 @@
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64",
-  "cxxBuildFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64",
+  "originalCxxBuildFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64",
+  "cxxBuildFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64",
   "abiPlatformVersion": 21,
   "cmake": {
-    "cmakeWrappingBaseFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cxx/debug/x86_64",
-    "cmakeArtifactsBaseFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64",
+    "cmakeWrappingBaseFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cxx/debug/x86_64",
+    "cmakeArtifactsBaseFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -19,7 +19,7 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64",
+      "buildRoot": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64",
       "cmakeToolchain": "/Users/ych-caihui/Library/Android/sdk/ndk/21.4.7075529/build/cmake/android.toolchain.cmake",
       "cmakeExecutable": "/Users/ych-caihui/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
       "variables": [
@@ -29,7 +29,7 @@
         },
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/prefab/x86_64/prefab"
+          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/prefab/x86_64/prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -65,11 +65,11 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj/x86_64"
+          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/x86_64"
         },
         {
           "name": "CMAKE_RUNTIME_OUTPUT_DIRECTORY",
-          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj/x86_64"
+          "value": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/x86_64"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
@@ -85,7 +85,7 @@
         }
       ]
     },
-    "cmakeServerLogFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64/cmake_server_log.txt"
+    "cmakeServerLogFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64/cmake_server_log.txt"
   },
   "variant": {
     "buildSystemArgumentList": [],
@@ -94,8 +94,8 @@
       "-std\u003dc++11"
     ],
     "variantName": "debug",
-    "objFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj",
-    "soFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj",
+    "soFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/lib",
     "isDebuggableEnabled": true,
     "validAbiList": [
       "X86_64"
@@ -104,13 +104,13 @@
     "implicitBuildTargetSet": [],
     "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
     "module": {
-      "cxxFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx",
+      "cxxFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx",
       "splitsAbiFilterSet": [],
-      "intermediatesFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates",
+      "intermediatesFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates",
       "gradleModulePathName": ":app",
-      "moduleRootFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app",
-      "moduleBuildFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build.gradle",
-      "makeFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/CMakeLists.txt",
+      "moduleRootFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app",
+      "moduleBuildFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build.gradle",
+      "makeFile": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt",
       "buildSystem": "CMAKE",
       "ndkFolder": "/Users/ych-caihui/Library/Android/sdk/ndk/21.4.7075529",
       "ndkVersion": "21.4.7075529",
@@ -196,23 +196,23 @@
         "SYSTEM": {}
       },
       "project": {
-        "rootBuildGradleFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn",
-        "cxxFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/.cxx",
-        "compilerSettingsCacheFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/.cxx",
+        "rootBuildGradleFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn",
+        "cxxFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/.cxx",
+        "compilerSettingsCacheFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/.cxx",
         "sdkFolder": "/Users/ych-caihui/Library/Android/sdk",
         "isNativeCompilerSettingsCacheEnabled": false,
         "isBuildOnlyTargetAbiEnabled": true,
-        "ideBuildTargetAbi": "x86_64,x86",
+        "ideBuildTargetAbi": "x86_64,arm64-v8a",
         "isCmakeBuildCohabitationEnabled": false,
         "isPrefabEnabled": false,
         "isV2NativeModelEnabled": true
       },
       "nativeBuildOutputLevel": "QUIET"
     },
-    "prefabDirectory": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/prefab"
+    "prefabDirectory": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/prefab"
   },
   "buildSettings": {
     "environmentVariables": []
   },
-  "prefabFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/prefab/x86_64"
+  "prefabFolder": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/prefab/x86_64"
 }

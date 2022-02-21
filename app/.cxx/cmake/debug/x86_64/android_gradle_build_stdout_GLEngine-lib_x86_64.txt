@@ -1,2 +1,2 @@
-ninja: Entering directory `/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64'
+ninja: Entering directory `/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64'
 ninja: no work to do.

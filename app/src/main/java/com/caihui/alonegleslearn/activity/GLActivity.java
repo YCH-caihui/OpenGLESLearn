@@ -29,10 +29,7 @@ public abstract class GLActivity extends AppCompatActivity {
             @Override
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                 mEngine.onSurfaceCreate();
-                Bitmap bitmap = getBitmap();
-                if(bitmap != null) {
-                    mEngine.setBitmapToNative(bitmap);
-                }
+                initSource();
 
             }
 
@@ -53,8 +50,12 @@ public abstract class GLActivity extends AppCompatActivity {
 
     public abstract int getRendererType();
 
-    protected Bitmap getBitmap() {
-        return null;
+    protected void initSource() {
+
     }
 
+
+    public void setImageData(int format, int width, int height, byte[] bytes) {
+        mEngine.setNativeImage(format, width, height, bytes);
+    }
 }

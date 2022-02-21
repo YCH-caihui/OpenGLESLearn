@@ -2,21 +2,21 @@
   {
     "level": "INFO",
     "message": "Start JSON generation. Platform version: 21 min SDK version: x86_64",
-    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/CMakeLists.txt",
+    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt",
     "tag": "debug|x86_64",
     "diagnosticCode": "UNKNOWN"
   },
   {
     "level": "INFO",
-    "message": "JSON \u0027/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/x86_64/android_gradle_build.json\u0027 was up-to-date",
-    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/CMakeLists.txt",
+    "message": "JSON \u0027/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86_64/android_gradle_build.json\u0027 was up-to-date",
+    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt",
     "tag": "debug|x86_64",
     "diagnosticCode": "UNKNOWN"
   },
   {
     "level": "INFO",
     "message": "JSON generation completed without problems",
-    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/CMakeLists.txt",
+    "file": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt",
     "tag": "debug|x86_64",
     "diagnosticCode": "UNKNOWN"
   }

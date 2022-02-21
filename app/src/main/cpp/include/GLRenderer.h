@@ -11,6 +11,7 @@
 #include "android/log.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "android/bitmap.h"
+#include "NativeImage.h"
 
 
 struct XBitmap
@@ -19,15 +20,11 @@ struct XBitmap
     void * addrPtr;
 };
 
-struct XNativeImage
-{
-
-};
-
 
 class GLRenderer
 {
-
+protected:
+    NativeImage mNaiveImage;
 public:
    virtual void onSurfaceCreate() = 0;
 
@@ -35,7 +32,18 @@ public:
 
    }
 
-   virtual ~GLRenderer() {}
+   virtual void setNativeImage(int format, int width, int height, uint8_t *pData)
+   {
+      mNaiveImage.format = format;
+      mNaiveImage.width = width;
+      mNaiveImage.height = height;
+      mNaiveImage.plane[0] = pData;
+      NativeImageUtil::reduction(&mNaiveImage);
+   }
+
+   virtual ~GLRenderer() {
+      NativeImageUtil::freeNativeImage(&mNaiveImage);
+   }
 
    virtual void onSurfaceChanged(int width, int height) = 0;
    virtual void onDrawFrame() = 0;
