@@ -29,7 +29,7 @@ public abstract class GLActivity extends AppCompatActivity {
             @Override
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                 mEngine.onSurfaceCreate();
-                initSource();
+                initResource();
 
             }
 
@@ -50,7 +50,7 @@ public abstract class GLActivity extends AppCompatActivity {
 
     public abstract int getRendererType();
 
-    protected void initSource() {
+    protected void initResource() {
 
     }
 

@@ -23,7 +23,7 @@ private:
     const char * vs = {
             "#version 300 es           \n"
             "layout(location = 0) in vec4 a_position;   \n"
-            "layout(location = 1) in vec4 a_texCoordinate;  \n"
+            "layout(location = 1) in vec2 a_texCoordinate;  \n"
             "out vec2 v_texCoordinate;                       \n"
             "void main()                                     \n"
             "{                                               \n"
@@ -53,30 +53,35 @@ private:
 
     };
 
-    YUVRect * m_rect;
-    GLProgram * m_programId;
-    attribute m_positionId;
-    attribute m_texCoordinateId;
-    uniform m_yTextureId;
-    uniform m_uvTextureId;
+    YUVRect * mRect;
+    GLProgram * mProgram;
+    attribute mPositionIndex;
+    attribute mTexCoordinateIndex;
+    uniform mYTextureIndex;
+    uniform mUvTextureIndex;
+    GLuint *mTextureId = new GLuint[2];
+
+
 
 public:
 
     GLYuvMap()
     {
-        m_rect = new YUVRect[] {
-                glm::vec4(-1.0f, 1.0f, 1.0f, 1.0f),   glm::vec2(0.0f, 0.0f),
-                glm::vec4(-1.0f, -1.0f , 1.0f , 1.0f), glm::vec2(0.0f, 1.0f),
-                glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),  glm::vec2(1.0f, 0.0f),
-                glm::vec4(1.0f, -1.0f,  1.0f, 1.0f), glm::vec2(1.0f, 1.0f),
+
+        mRect = new YUVRect[] {
+                glm::vec4(-1.0f,  0.78f, 0.0f, 1.0f),   glm::vec2(0.0f, 0.0f),
+                glm::vec4(-1.0f, -0.78f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f),
+                glm::vec4(1.0f,  -0.78f, 0.0f, 1.0f),  glm::vec2(1.0f, 1.0f),
+                glm::vec4(1.0f,   0.78f, 0.0f, 1.0f), glm::vec2(1.0f, 0.0f),
         };
     }
 
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
-
+    void initNaiveImage() override;
     ~GLYuvMap() {
+        delete mTextureId;
     }
 };
 

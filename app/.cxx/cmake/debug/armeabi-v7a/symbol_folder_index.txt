@@ -1,1 +1,1 @@
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj/armeabi-v7a
+/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/armeabi-v7a

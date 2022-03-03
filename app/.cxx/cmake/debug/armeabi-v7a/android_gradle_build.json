@@ -1,20 +1,20 @@
 {
   "stringTable": {},
   "buildFiles": [
-    "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/CMakeLists.txt"
+    "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
     [
       "/Users/ych-caihui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
       "-C",
-      "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
+      "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "/Users/ych-caihui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
     "-C",
-    "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
+    "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
@@ -22,13 +22,13 @@
       "buildCommandComponents": [
         "/Users/ych-caihui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
         "-C",
-        "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
+        "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/armeabi-v7a",
         "GLEngine-lib"
       ],
       "buildType": "debug",
       "abi": "armeabi-v7a",
       "artifactName": "GLEngine-lib",
-      "output": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libGLEngine-lib.so",
+      "output": "/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libGLEngine-lib.so",
       "runtimeFiles": []
     }
   },

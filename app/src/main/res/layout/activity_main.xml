@@ -22,5 +22,11 @@
         android:id="@+id/bt_texture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="texture"/>
+        android:text="textureMap"/>
+
+    <Button
+        android:id="@+id/bt_yuv_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="textureYuvMap"/>
 </LinearLayout>

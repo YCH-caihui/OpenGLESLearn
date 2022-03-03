@@ -28,21 +28,23 @@ protected:
 public:
    virtual void onSurfaceCreate() = 0;
 
-   virtual void setBitmap(XBitmap * bitmap) {
-
-   }
-
-   virtual void setNativeImage(int format, int width, int height, uint8_t *pData)
+   void setNativeImage(int format, int width, int height, uint8_t *pData)
    {
       mNaiveImage.format = format;
       mNaiveImage.width = width;
       mNaiveImage.height = height;
       mNaiveImage.plane[0] = pData;
       NativeImageUtil::reduction(&mNaiveImage);
+      initNaiveImage();
+
    }
 
    virtual ~GLRenderer() {
       NativeImageUtil::freeNativeImage(&mNaiveImage);
+   }
+
+   virtual void initNaiveImage() {
+
    }
 
    virtual void onSurfaceChanged(int width, int height) = 0;

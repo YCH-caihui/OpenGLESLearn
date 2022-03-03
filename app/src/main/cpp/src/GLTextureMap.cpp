@@ -27,18 +27,13 @@ void GLTextureMap::onSurfaceChanged(int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void GLTextureMap::setBitmap(XBitmap *bitmap) {
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bitmap->info->width, bitmap->info->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->addrPtr);
-    glBindTexture(GL_TEXTURE_2D, GL_NONE);
-}
 
-void GLTextureMap::setNativeImage(int format, int width, int height, uint8_t *pData)
+void GLTextureMap::initNaiveImage()
 {
-    GLRenderer::setNativeImage(format, width, height, pData);
     glBindTexture(GL_TEXTURE_2D, m_textureId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mNaiveImage.width, mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
 }
 
 void GLTextureMap::onDrawFrame()

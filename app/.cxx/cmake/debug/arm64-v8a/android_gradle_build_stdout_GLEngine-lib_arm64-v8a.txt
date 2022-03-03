@@ -1,22 +1,12 @@
-ninja: Entering directory `/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/.cxx/cmake/debug/arm64-v8a'
-[1/3] Building CXX object CMakeFiles/GLEngine-lib.dir/src/GLYuvMap.cpp.o
-In file included from /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/src/GLYuvMap.cpp:4:
-In file included from /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/GLYuvMap.h:10:
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/NativeImage.h:42:9: warning: 'IMAGE_FORMAT_GRAY' macro redefined [-Wmacro-redefined]
-#define IMAGE_FORMAT_GRAY "GRAY"
+ninja: Entering directory `/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/arm64-v8a'
+[1/2] Building CXX object CMakeFiles/GLEngine-lib.dir/src/GLYuvMap.cpp.o
+In file included from /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/src/GLYuvMap.cpp:4:
+/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/include/GLYuvMap.h:84:9: warning: 'delete' applied to a pointer that was allocated with 'new[]'; did you mean 'delete[]'? [-Wmismatched-new-delete]
+        delete mTextureId;
         ^
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/NativeImage.h:34:9: note: previous definition is here
-#define IMAGE_FORMAT_GRAY 0x06
-        ^
+              []
+/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/include/GLYuvMap.h:62:26: note: allocated with 'new[]' here
+    GLuint *mTextureId = new GLuint[2];
+                         ^
 1 warning generated.
-[2/3] Building CXX object CMakeFiles/GLEngine-lib.dir/src/gl-jni.cpp.o
-In file included from /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/src/gl-jni.cpp:8:
-In file included from /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/GLYuvMap.h:10:
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/NativeImage.h:42:9: warning: 'IMAGE_FORMAT_GRAY' macro redefined [-Wmacro-redefined]
-#define IMAGE_FORMAT_GRAY "GRAY"
-        ^
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/src/main/cpp/include/NativeImage.h:34:9: note: previous definition is here
-#define IMAGE_FORMAT_GRAY 0x06
-        ^
-1 warning generated.
-[3/3] Linking CXX shared library /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/Application/Android/AloneGLESLearn/app/build/intermediates/cmake/debug/obj/arm64-v8a/libGLEngine-lib.so
+[2/2] Linking CXX shared library /Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/arm64-v8a/libGLEngine-lib.so

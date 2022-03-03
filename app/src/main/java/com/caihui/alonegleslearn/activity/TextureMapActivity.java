@@ -24,7 +24,7 @@ public class TextureMapActivity extends GLActivity{
     }
 
     @Override
-    protected void initSource() {
+    protected void initResource() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.a);
         if(bitmap != null) {
             int bytes = bitmap.getByteCount();

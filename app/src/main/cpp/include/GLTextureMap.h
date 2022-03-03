@@ -68,7 +68,6 @@ public:
     }
 
     void onSurfaceCreate() override;
-    void setBitmap(XBitmap * bitmap) override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
 
@@ -81,7 +80,7 @@ public:
         glDeleteTextures(1, &m_textureId);
     }
 
-    void setNativeImage(int format, int width, int height, uint8_t *pData);
+    void initNaiveImage() override;
 };
 
 #endif //ALONEGLESLEARN_GLTEXTUREMAP_H
