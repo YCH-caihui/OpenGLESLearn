@@ -8,7 +8,6 @@
 #include "GLRenderer.h"
 #include "GLProgram.h"
 #include "NativeImage.h"
-#include "NativeImage.h"
 
 
 struct YUVRect {
@@ -79,9 +78,11 @@ public:
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
-    void initNaiveImage() override;
+    void initNativeImage() override;
     ~GLYuvMap() {
-        delete mTextureId;
+        if(mTextureId != NULL) {
+            delete[] mTextureId;
+        }
     }
 };
 

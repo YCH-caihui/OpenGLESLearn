@@ -1,1 +1,0 @@
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/build/intermediates/cmake/debug/obj/arm64-v8a

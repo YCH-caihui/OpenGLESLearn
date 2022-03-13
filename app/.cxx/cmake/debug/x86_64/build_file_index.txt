@@ -1,1 +1,0 @@
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/src/main/cpp/CMakeLists.txt

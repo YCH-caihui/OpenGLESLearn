@@ -1,3 +1,0 @@
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
-/Users/ych-caihui/Documents/Develop/Code/MediaCode/OpenGLESLearn/app/.cxx/cmake/debug/x86/CMakeFiles/GLEngine-lib.dir

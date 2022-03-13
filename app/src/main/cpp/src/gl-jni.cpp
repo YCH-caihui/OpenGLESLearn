@@ -6,6 +6,7 @@
 #include "GLUbo.h"
 #include "GLTextureMap.h"
 #include "GLYuvMap.h"
+#include "GLVboEBoVao.h"
 
 #include "android/bitmap.h"
 
@@ -14,6 +15,7 @@
  static const int RENDERER_TYPE_UBO = 101;
  static const int RENDERER_TYPE_TEXTURE_MAP = 102;
  static const int RENDERER_TYPE_YUV_MAP = 103;
+ static const int RENDERER_TYPE_VBO_EBO_VAO = 104;
 
 GLRenderer * glRenderer = nullptr;
 
@@ -31,6 +33,8 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
         glRenderer = new GLTextureMap();
     } else if(rendererType == RENDERER_TYPE_YUV_MAP) {
         glRenderer = new GLYuvMap();
+    } else if(rendererType == RENDERER_TYPE_VBO_EBO_VAO) {
+        glRenderer = new GLYboEBoVao();
     }
 }
 

@@ -80,7 +80,7 @@ public:
         glDeleteTextures(1, &m_textureId);
     }
 
-    void initNaiveImage() override;
+    void initNativeImage() override;
 };
 
 #endif //ALONEGLESLEARN_GLTEXTUREMAP_H

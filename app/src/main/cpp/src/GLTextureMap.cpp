@@ -28,7 +28,7 @@ void GLTextureMap::onSurfaceChanged(int width, int height)
 }
 
 
-void GLTextureMap::initNaiveImage()
+void GLTextureMap::initNativeImage()
 {
     glBindTexture(GL_TEXTURE_2D, m_textureId);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mNaiveImage.width, mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);

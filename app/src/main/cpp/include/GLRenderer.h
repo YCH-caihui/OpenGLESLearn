@@ -35,7 +35,7 @@ public:
       mNaiveImage.height = height;
       mNaiveImage.plane[0] = pData;
       NativeImageUtil::reduction(&mNaiveImage);
-      initNaiveImage();
+      initNativeImage();
 
    }
 
@@ -43,7 +43,7 @@ public:
       NativeImageUtil::freeNativeImage(&mNaiveImage);
    }
 
-   virtual void initNaiveImage() {
+   virtual void initNativeImage() {
 
    }
 

@@ -29,4 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="textureYuvMap"/>
+
+    <Button
+        android:id="@+id/bt_vbo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="vbo_ebo_vao"/>
 </LinearLayout>

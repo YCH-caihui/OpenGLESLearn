@@ -36,7 +36,7 @@ void GLYuvMap::onSurfaceChanged(int width, int height)
 
 
 
-void GLYuvMap::initNaiveImage()
+void GLYuvMap::initNativeImage()
 {
     glBindTexture(GL_TEXTURE_2D, *mTextureId);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, mNaiveImage.width, mNaiveImage.height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
