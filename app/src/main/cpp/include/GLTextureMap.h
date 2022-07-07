@@ -14,30 +14,23 @@ struct TextureUnit {
 };
 
 
-class GLTextureMap : public GLRenderer
-{
+class GLTextureMap : public GLRenderer {
 private:
-
-
-     TextureUnit * mTextureUnit;
-
-    GLuint  mProgramId;
-    GLint   mPositionId;
-    GLint  mTexCoordinateId;
-    GLint  mTextureLocationId;
-    GLuint  mTextureBufferId;
+    TextureUnit *mTextureUnit;
+    GLuint mProgramId;
+    GLint mPositionId;
+    GLint mTexCoordinateId;
+    GLint mTextureLocationId;
+    GLuint mTextureBufferId;
 
 
 public:
 
     GLTextureMap();
-
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
-
     ~GLTextureMap();
-
     void initNativeImage() override;
 };
 
