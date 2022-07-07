@@ -14,11 +14,7 @@
 #include "NativeImage.h"
 
 
-struct XBitmap
-{
-    AndroidBitmapInfo * info;
-    void * addrPtr;
-};
+
 
 
 class GLRenderer

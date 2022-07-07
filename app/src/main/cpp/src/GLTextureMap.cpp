@@ -4,15 +4,51 @@
 #include "GLTextureMap.h"
 
 
+const GLchar * vs = {
+        "#version 300 es            \n"
+        "layout(location = 0) in vec4 a_position;  \n"
+        "layout(location = 1) in vec2 a_texCoordinate;   \n"
+        "out vec2 v_texCoordinate;                        \n"
+        "void main()                                      \n"
+        "{                                                \n"
+        "  gl_Position = a_position;                      \n"
+        "  v_texCoordinate  = a_texCoordinate;            \n"
+        "}                                               \n"
+};
+
+
+const GLchar * fs = {
+        "#version 300 es                           \n"
+        "precision mediump float;                   \n"
+        "in vec2 v_texCoordinate;                    \n"
+        "uniform sampler2D s_TextureMap;            \n"
+        "layout(location = 0) out vec4 outColor;    \n"
+        "void main()                                \n"
+        "{                                          \n"
+        " outColor = texture(s_TextureMap, v_texCoordinate);   \n "
+        "}                                                    \n"
+};
+
+
+ GLTextureMap::GLTextureMap() {
+    mTextureUnit = new TextureUnit[] {
+            glm::vec4(-1.0f, 1.0f, 1.0f, 1.0f),   glm::vec2(0.0f, 0.0f),
+            glm::vec4(-1.0f, -1.0f , 1.0f , 1.0f), glm::vec2(0.0f, 1.0f),
+            glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),  glm::vec2(1.0f, 0.0f),
+            glm::vec4(1.0f, -1.0f,  1.0f, 1.0f), glm::vec2(1.0f, 1.0f),
+    };
+}
+
+
 void GLTextureMap::onSurfaceCreate()
 {
-    m_program = new GLProgram(vs, fs);
-    a_position =  m_program->getAttribLocation("a_position");
-    a_texCoordinate = m_program->getAttribLocation("a_texCoordinate");
-    s_textureLocation = m_program->getUniformLocation("s_TextureMap");
+     mProgramId = ProgramUtils::create(vs, fs);
+     mPositionId = glGetAttribLocation(mProgramId, "a_position");
+     mTexCoordinateId  = glGetAttribLocation(mProgramId,"a_texCoordinate");
+    mTextureLocationId = glGetUniformLocation(mProgramId, "s_TextureMap");
 
-    glGenTextures(1, &m_textureId);
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glGenTextures(1, &mTextureBufferId);
+    glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -30,7 +66,7 @@ void GLTextureMap::onSurfaceChanged(int width, int height)
 
 void GLTextureMap::initNativeImage()
 {
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mNaiveImage.width, mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
@@ -41,16 +77,25 @@ void GLTextureMap::onDrawFrame()
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glClearColor(0.4, 0.4, 0.4, 1.0);
 
-    m_program->useToRenderer();
+    glUseProgram(mProgramId);
     glActiveTexture(GL_TEXTURE31);
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
-    glUniform1i(s_textureLocation, 31);
+    glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
+    glUniform1i(mTextureLocationId, 31);
 
-    glEnableVertexAttribArray(a_position);
-    glEnableVertexAttribArray(a_texCoordinate);
-    glVertexAttribPointer(a_position, 4, GL_FLOAT, GL_FALSE, sizeof(Rect), m_rect);
-    glVertexAttribPointer(a_texCoordinate, 2, GL_FLOAT, GL_FALSE, sizeof(Rect), &m_rect[0].texCoordinate);
+    glEnableVertexAttribArray(mPositionId);
+    glEnableVertexAttribArray(mTexCoordinateId);
+    glVertexAttribPointer(mPositionId, 4, GL_FLOAT, GL_FALSE, sizeof(TextureUnit), mTextureUnit);
+    glVertexAttribPointer(mTexCoordinateId, 2, GL_FLOAT, GL_FALSE, sizeof(TextureUnit), &mTextureUnit[0].texCoordinate);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glDisableVertexAttribArray(a_position);
-    glDisableVertexAttribArray(a_texCoordinate);
+    glDisableVertexAttribArray(mPositionId);
+    glDisableVertexAttribArray(mTexCoordinateId);
 }
+
+GLTextureMap::~GLTextureMap(){
+    if(mTextureUnit != nullptr) {
+        delete[] mTextureUnit;
+        mTextureUnit = nullptr;
+    }
+
+    glDeleteTextures(1, &mTextureBufferId);
+ }
