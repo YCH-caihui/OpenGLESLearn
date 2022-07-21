@@ -3,23 +3,65 @@
 //
 #include "GLYuvMap.h"
 
+static const char * vs = {
+        "#version 300 es           \n"
+        "layout(location = 0) in vec4 a_position;   \n"
+        "layout(location = 1) in vec2 a_texCoordinate;  \n"
+        "out vec2 v_texCoordinate;                       \n"
+        "void main()                                     \n"
+        "{                                               \n"
+        "   gl_Position = a_position;                   \n"
+        "   v_texCoordinate  = a_texCoordinate;         \n"
+        "}                                              \n"
+};
+
+static const char * fs = {
+        "#version 300 es                              \n"
+        "precision mediump float;                     \n"
+        "in vec2 v_texCoordinate;                     \n"
+        "layout(location = 0) out vec4 outColor;      \n"
+        "uniform sampler2D y_texture;                 \n"
+        "uniform sampler2D uv_texture;                \n"
+        "void main()                                  \n"
+        "{                                            \n"
+        "   vec3 yuv;                                 \n"
+        "  yuv.x = texture(y_texture, v_texCoordinate).r;  \n"
+        "  yuv.y = texture(uv_texture, v_texCoordinate).r - 0.5; \n"
+        "  yuv.z = texture(uv_texture, v_texCoordinate).a - 0.5; \n"
+        " highp vec3 rgb = mat3(    1, 1, 1,                   \n"
+        "                          0, -0.344, 1.770,          \n"
+        "                          1.403, -0.714, 0) * yuv;    \n"
+        " outColor = vec4(rgb, 1);                            \n"
+        "}                                                    \n"
+
+};
+
+GLYuvMap::GLYuvMap() {
+    mRect = new YUVRect[] {
+            glm::vec4(-1.0f,  0.78f, 0.0f, 1.0f),   glm::vec2(0.0f, 0.0f),
+            glm::vec4(-1.0f, -0.78f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f),
+            glm::vec4(1.0f,  -0.78f, 0.0f, 1.0f),  glm::vec2(1.0f, 1.0f),
+            glm::vec4(1.0f,   0.78f, 0.0f, 1.0f), glm::vec2(1.0f, 0.0f),
+    };
+}
+
 void GLYuvMap::onSurfaceCreate()
 {
-    mProgram= new GLProgram(vs, fs);
-    mPositionIndex = mProgram->getAttribLocation("a_position");
-    mTexCoordinateIndex = mProgram->getAttribLocation("a_texCoordinate");
-    mYTextureIndex = mProgram->getUniformLocation("y_texture");
-    mUvTextureIndex = mProgram->getUniformLocation("uv_texture");
+    mProgramId = ProgramUtils::create(vs, fs);
+    mPositionId = glGetAttribLocation(mProgramId, "a_position");
+    mTexCoordinateId = glGetAttribLocation(mProgramId, "a_texCoordinate");
+    mYTextureId = glGetUniformLocation(mProgramId, "y_texture");
+    mUvTextureId = glGetUniformLocation(mProgramId, "uv_texture");
 
-    glGenTextures(2, mTextureId);
-    glBindTexture(GL_TEXTURE_2D, *mTextureId);
+    glGenTextures(2, mTextureBufferId);
+    glBindTexture(GL_TEXTURE_2D, *mTextureBufferId);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
-    glBindTexture(GL_TEXTURE_2D, *(mTextureId + 1));
+    glBindTexture(GL_TEXTURE_2D, *(mTextureBufferId + 1));
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -38,11 +80,11 @@ void GLYuvMap::onSurfaceChanged(int width, int height)
 
 void GLYuvMap::initNativeImage()
 {
-    glBindTexture(GL_TEXTURE_2D, *mTextureId);
+    glBindTexture(GL_TEXTURE_2D, *mTextureBufferId);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, mNaiveImage.width, mNaiveImage.height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
-    glBindTexture(GL_TEXTURE_2D, *(mTextureId + 1));
+    glBindTexture(GL_TEXTURE_2D, *(mTextureBufferId + 1));
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, mNaiveImage.width >> 1, mNaiveImage.height >> 1, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, mNaiveImage.plane[1]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
@@ -53,22 +95,22 @@ void GLYuvMap::onDrawFrame()
     GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 1.0);
-    mProgram->useToRenderer();
+    glUseProgram(mProgramId);
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, *mTextureId);
-    glUniform1i(mYTextureIndex, 0);
+    glBindTexture(GL_TEXTURE_2D, *mTextureBufferId);
+    glUniform1i(mYTextureId, 0);
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, *(mTextureId + 1));
-    glUniform1i(mUvTextureIndex, 1);
+    glBindTexture(GL_TEXTURE_2D, *(mTextureBufferId + 1));
+    glUniform1i(mUvTextureId, 1);
 
-    glEnableVertexAttribArray(mPositionIndex);
-    glEnableVertexAttribArray(mTexCoordinateIndex);
-    glVertexAttribPointer(mPositionIndex, 4, GL_FLOAT, GL_FALSE, sizeof(YUVRect), mRect);
-    glVertexAttribPointer(mTexCoordinateIndex, 2, GL_FLOAT, GL_FALSE, sizeof(YUVRect), &(mRect[0].texCoordinate));
+    glEnableVertexAttribArray(mPositionId);
+    glEnableVertexAttribArray(mTexCoordinateId);
+    glVertexAttribPointer(mPositionId, 4, GL_FLOAT, GL_FALSE, sizeof(YUVRect), mRect);
+    glVertexAttribPointer(mTexCoordinateId, 2, GL_FLOAT, GL_FALSE, sizeof(YUVRect), &(mRect[0].texCoordinate));
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, indices);
-    glDisableVertexAttribArray(mPositionIndex);
-    glDisableVertexAttribArray(mTexCoordinateIndex);
+    glDisableVertexAttribArray(mPositionId);
+    glDisableVertexAttribArray(mTexCoordinateId);
 
 }

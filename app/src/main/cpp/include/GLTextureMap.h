@@ -17,11 +17,11 @@ struct TextureUnit {
 class GLTextureMap : public GLRenderer {
 private:
     TextureUnit *mTextureUnit;
-    GLuint mProgramId;
-    GLint mPositionId;
-    GLint mTexCoordinateId;
-    GLint mTextureLocationId;
-    GLuint mTextureBufferId;
+    GLuint mProgramId{};
+    GLint mPositionId{};
+    GLint mTexCoordinateId{};
+    GLint mTextureLocationId{};
+    GLuint mTextureBufferId{};
 
 
 public:
