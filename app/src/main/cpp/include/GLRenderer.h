@@ -6,6 +6,7 @@
 #define ALONEGLESLEARN_GLRENDERER_H
 #include "GLProgram.h"
 #include <GLES3/gl3.h>
+#include <jni.h>
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
 #include "android/log.h"
@@ -39,8 +40,10 @@ public:
       NativeImageUtil::freeNativeImage(&mNaiveImage);
    }
 
-   virtual void initNativeImage() {
+   virtual void initNativeImage() {}
 
+
+   void updateParameter(JNIEnv * env, jobject object) {
    }
 
    virtual void onSurfaceChanged(int width, int height) = 0;

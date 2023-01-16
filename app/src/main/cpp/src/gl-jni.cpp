@@ -48,7 +48,12 @@ void setNativeImage(JNIEnv * env, jobject object, jint format, jint width, jint 
 
 }
 
+void updateParameter(JNIEnv * env, jobject object) {
+    glRenderer->updateParameter(env, object);
+}
+
 void onSurfaceCreate(JNIEnv *env, jobject object) {
+    updateParameter(env, object);
     if (glRenderer) {
         glRenderer->onSurfaceCreate();
     }

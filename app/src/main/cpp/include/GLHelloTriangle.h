@@ -19,7 +19,7 @@ private:
     int mWidth;
     int mHeight;
 
-    void drawTriangle(const float * vertex);
+    void drawTriangle(const float * vertex) const;
 public:
     void onSurfaceCreate() override;
 

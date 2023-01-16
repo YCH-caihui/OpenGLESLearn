@@ -81,7 +81,7 @@ void GLHelloTriangle::onDrawFrame() {
     drawTriangle(triangleA);
 }
 
-void GLHelloTriangle::drawTriangle(const float * vertex) {
+void GLHelloTriangle::drawTriangle(const float * vertex) const {
     glEnableVertexAttribArray(mPositionLoc);
     glEnableVertexAttribArray(mColorLoc);
     glVertexAttribPointer(mPositionLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8,  vertex);
