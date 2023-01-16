@@ -1,6 +1,5 @@
 package com.caihui.alonegleslearn.activity;
 
-import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
@@ -11,7 +10,7 @@ import com.caihui.alonegleslearn.GLEngine;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public abstract class GLActivity extends AppCompatActivity {
+public abstract   class GLActivity extends AppCompatActivity implements GLSurfaceView.Renderer {
 
     public GLEngine mEngine;
 
@@ -22,40 +21,33 @@ public abstract class GLActivity extends AppCompatActivity {
         surfaceView.setEGLContextClientVersion(3);
 
         mEngine = new GLEngine();
-
         mEngine.nativeInit(getRendererType());
-
-        surfaceView.setRenderer(new GLSurfaceView.Renderer() {
-            @Override
-            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-                mEngine.onSurfaceCreate();
-                initResource();
-
-            }
-
-            @Override
-            public void onSurfaceChanged(GL10 gl, int width, int height) {
-                mEngine.onSurfaceChanged(width, height);
-            }
-
-            @Override
-            public void onDrawFrame(GL10 gl) {
-                mEngine.onDrawFrame();
-            }
-        });
+        surfaceView.setRenderer(this);
         setContentView(surfaceView);
-
-
-    }
-
-    public abstract int getRendererType();
-
-    protected void initResource() {
-
     }
 
 
     public void setImageData(int format, int width, int height, byte[] bytes) {
         mEngine.setNativeImage(format, width, height, bytes);
     }
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        mEngine.onSurfaceCreate();
+        initResource();
+    }
+
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        mEngine.onSurfaceChanged(width, height);
+    }
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        mEngine.onDrawFrame();
+    }
+
+
+    protected void initResource() {}
+    public abstract int getRendererType();
 }

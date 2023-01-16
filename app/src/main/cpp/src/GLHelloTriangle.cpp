@@ -76,7 +76,7 @@ void GLHelloTriangle::onDrawFrame() {
 
     glm::mat4 proj = glm::ortho(0.0f, (float) mWidth, (float)mHeight, 0.0f, 1.0f, -1.0f);
     glUniformMatrix4fv(mMvpLoc, 1, GL_FALSE, glm::value_ptr(proj));
-    
+
     drawTriangle(triangle);
     drawTriangle(triangleA);
 }
