@@ -12,12 +12,14 @@
 
 class GLHelloTriangle : public GLRenderer {
 private:
-    GLuint mProgramId;
-    GLint mPositionId;
-    GLint mColorId;
-    GLint mMvpId;
+    GLuint mProgram;
+    GLint mPositionLoc;
+    GLint mColorLoc;
+    GLint mMvpLoc;
     int mWidth;
     int mHeight;
+
+    void drawTriangle(const float * vertex);
 public:
     void onSurfaceCreate() override;
 

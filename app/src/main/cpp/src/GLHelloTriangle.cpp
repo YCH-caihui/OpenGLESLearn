@@ -45,17 +45,17 @@ const float triangleA[] = {
 void GLHelloTriangle::onSurfaceCreate() {
 
 
-    mProgramId = ProgramUtils::create(vertexShader, fragmentShader);
-    mPositionId = glGetAttribLocation(mProgramId, "v_position");
-    mColorId = glGetAttribLocation(mProgramId, "v_color");
-    mMvpId = glGetUniformLocation(mProgramId, "v_mvp");
+    mProgram = ProgramUtils::create(vertexShader, fragmentShader);
+    mPositionLoc = glGetAttribLocation(mProgram, "v_position");
+    mColorLoc = glGetAttribLocation(mProgram, "v_color");
+    mMvpLoc = glGetUniformLocation(mProgram, "v_mvp");
 
     GLint resultParams = -1;
-    glGetProgramiv(mProgramId, GL_ACTIVE_UNIFORMS, &resultParams);
+    glGetProgramiv(mProgram, GL_ACTIVE_UNIFORMS, &resultParams);
     LOG_I(TAG, "active uniforms: %d", resultParams);
 
     resultParams = -1;
-    glGetProgramiv(mProgramId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &resultParams);
+    glGetProgramiv(mProgram, GL_ACTIVE_UNIFORM_MAX_LENGTH, &resultParams);
     LOG_I(TAG, "active uniform max length: %d", resultParams );
 
 
@@ -70,29 +70,24 @@ void GLHelloTriangle::onSurfaceChanged(int width, int height) {
 
 void GLHelloTriangle::onDrawFrame() {
 
-    glUseProgram(mProgramId);
+    glUseProgram(mProgram);
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     glm::mat4 proj = glm::ortho(0.0f, (float) mWidth, (float)mHeight, 0.0f, 1.0f, -1.0f);
-    glUniformMatrix4fv(mMvpId, 1, GL_FALSE, glm::value_ptr(proj));
+    glUniformMatrix4fv(mMvpLoc, 1, GL_FALSE, glm::value_ptr(proj));
+    
+    drawTriangle(triangle);
+    drawTriangle(triangleA);
+}
 
-    glEnableVertexAttribArray(mPositionId);
-    glEnableVertexAttribArray(mColorId);
-    glVertexAttribPointer(mPositionId, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8, triangle);
-    glVertexAttribPointer(mColorId, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8, &triangle[4]);
+void GLHelloTriangle::drawTriangle(const float * vertex) {
+    glEnableVertexAttribArray(mPositionLoc);
+    glEnableVertexAttribArray(mColorLoc);
+    glVertexAttribPointer(mPositionLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8,  vertex);
+    glVertexAttribPointer(mColorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8,  &vertex[4]);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(mPositionId);
-    glDisableVertexAttribArray(mColorId);
-
-    glEnableVertexAttribArray(mPositionId);
-    glEnableVertexAttribArray(mColorId);
-    glVertexAttribPointer(mPositionId, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8, triangleA);
-    glVertexAttribPointer(mColorId, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 8, &triangleA[4]);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(mPositionId);
-    glDisableVertexAttribArray(mColorId);
-
-
+    glDisableVertexAttribArray(mPositionLoc);
+    glDisableVertexAttribArray(mColorLoc);
 }
 
