@@ -9,11 +9,6 @@
 
 #define TAG "YCH/GLProgram"
 
-typedef GLint attribute;
-typedef GLint uniform;
-typedef GLuint * bufferId;
-typedef GLuint * textureId;
-
 
 #define  LOG_E(T, ...)  __android_log_print(ANDROID_LOG_ERROR,T,__VA_ARGS__)
 #define  LOG_I(T, ...)  __android_log_print(ANDROID_LOG_INFO, T, __VA_ARGS__)
@@ -86,9 +81,9 @@ public:
 
     void useToRenderer();
 
-    attribute getAttribLocation(const GLchar * name);
+    GLuint getAttribLocation(const GLchar * name);
 
-    uniform  getUniformLocation(const char * name);
+    GLuint getUniformLocation(const char * name);
 
     void  getActiveUniforms(GLint * params);
 

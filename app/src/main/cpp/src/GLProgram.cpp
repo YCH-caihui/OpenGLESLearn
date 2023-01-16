@@ -75,12 +75,12 @@ void GLProgram::useToRenderer()
     glUseProgram(m_programId);
 }
 
-attribute GLProgram::getAttribLocation(const GLchar *name)
+GLuint GLProgram::getAttribLocation(const GLchar *name)
 {
     return glGetAttribLocation(m_programId, name);
 }
 
-uniform GLProgram::getUniformLocation(const char *name)
+GLuint GLProgram::getUniformLocation(const char *name)
 {
     return glGetUniformLocation(m_programId, name);
 }

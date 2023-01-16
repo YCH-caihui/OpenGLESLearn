@@ -44,9 +44,9 @@ private:
 
     VBORect * mRect;
     GLProgram * mProgram;
-    attribute mPositionIndex;
-    attribute  mTexCoordinateIndex;
-    attribute  mTextureIndex;
+    GLuint mPositionIndex;
+    GLuint mTexCoordinateIndex;
+    GLuint mTextureIndex;
     GLuint mTextureId;
 
     GLuint mVaoId;
