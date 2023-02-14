@@ -31,10 +31,13 @@ public abstract   class GLActivity extends AppCompatActivity implements GLSurfac
         mEngine.setNativeImage(format, width, height, bytes);
     }
 
+    public void updateParameter(int paramType, Object paramObj) {
+        mEngine.updateParameter(paramType,paramObj);
+    }
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         mEngine.onSurfaceCreate();
-        initResource();
     }
 
     @Override
@@ -48,6 +51,5 @@ public abstract   class GLActivity extends AppCompatActivity implements GLSurfac
     }
 
 
-    protected void initResource() {}
     public abstract int getRendererType();
 }

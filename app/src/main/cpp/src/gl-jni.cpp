@@ -48,12 +48,12 @@ void setNativeImage(JNIEnv * env, jobject object, jint format, jint width, jint 
 
 }
 
-void updateParameter(JNIEnv * env, jobject object) {
-    glRenderer->updateParameter(env, object);
+void updateParameter(JNIEnv * env, jobject obj, jint  paramType, jobject paramObj) {
+    LOG_E("caihui", "==================updateParameter");
+    //glRenderer->updateParameter(env, object);
 }
 
 void onSurfaceCreate(JNIEnv *env, jobject object) {
-    updateParameter(env, object);
     if (glRenderer) {
         glRenderer->onSurfaceCreate();
     }
@@ -77,6 +77,7 @@ static const JNINativeMethod nativeMethod[] = {
         "onSurfaceCreate", "()V", (void *) (onSurfaceCreate),
         "onSurfaceChanged", "(II)V", (void *) (onSurfaceChanged),
         "onDrawFrame", "()V", (void *) (onDrawFrame),
+        "updateParameter","(ILjava/lang/Object;)V", (void *)(updateParameter),
         "setNativeImage", "(III[B)V",(void *)setNativeImage,
 
 };

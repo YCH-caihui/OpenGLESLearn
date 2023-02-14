@@ -9,13 +9,17 @@ import com.caihui.alonegleslearn.R;
 
 import java.nio.ByteBuffer;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 public class TextureMapActivity extends GLActivity{
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        super.onSurfaceCreated(gl, config);
+        initResource();
     }
 
     @Override
@@ -23,7 +27,6 @@ public class TextureMapActivity extends GLActivity{
         return GLEngine.RENDERER_TYPE_TEXTURE_MAP;
     }
 
-    @Override
     protected void initResource() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.a);
         if(bitmap != null) {

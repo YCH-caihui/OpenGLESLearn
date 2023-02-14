@@ -2,14 +2,24 @@ package com.caihui.alonegleslearn.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 
 import com.caihui.alonegleslearn.GLEngine;
 import com.caihui.alonegleslearn.R;
 
 import java.nio.ByteBuffer;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 public class VboEboVaoActivity extends GLActivity {
 
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        super.onSurfaceCreated(gl, config);
+        initResource();
+    }
 
     @Override
     public int getRendererType() {
@@ -17,7 +27,7 @@ public class VboEboVaoActivity extends GLActivity {
     }
 
 
-    @Override
+
     protected void initResource() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.a);
         if(bitmap != null) {
