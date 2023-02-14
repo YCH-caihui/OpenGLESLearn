@@ -49,9 +49,9 @@
 
 struct NativeImage
 {
-    int width;
-    int height;
-    int format;
+    uint width;
+    uint height;
+    uint format;
     uint8_t * plane[3];
 
 };

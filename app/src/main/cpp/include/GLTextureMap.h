@@ -23,6 +23,8 @@ private:
     GLint mTextureLocationId{};
     GLuint mTextureBufferId{};
 
+    NativeImage mNaiveImage;
+
 
 public:
 
@@ -30,6 +32,7 @@ public:
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
+    void updateParameter(JNIEnv * env, int paramType, jobject object) override;
     ~GLTextureMap();
     void initNativeImage() override;
 };

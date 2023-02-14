@@ -7,7 +7,7 @@
 #include <GLES3//gl3.h>
 #include <android/log.h>
 
-#define TAG "YCH/GLProgram"
+#define TAG_TEST "YCH/GLProgram"
 
 
 #define  LOG_E(T, ...)  __android_log_print(ANDROID_LOG_ERROR,T,__VA_ARGS__)
@@ -34,7 +34,7 @@ public:
             glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &resultParam);
             auto * infoLog = new GLchar[resultParam + 1];
             glGetProgramInfoLog(programId, resultParam, 0, infoLog);
-            LOG_E(TAG, "Failed to lint program: %s", infoLog);
+            LOG_E(TAG_TEST, "Failed to lint program: %s", infoLog);
             glDeleteProgram(programId);
             delete [] infoLog;
             return -1;
@@ -56,7 +56,7 @@ private:
             glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
             auto  * infoLog = new GLchar [infoLogLength + 1];
             glGetShaderInfoLog(shaderId, infoLogLength, nullptr, infoLog);
-            LOG_E(TAG, "Failed to compile  %s  shader: %s", shaderType == GL_VERTEX_SHADER ? "vertex_shader" : "fragment_shader" , infoLog);
+            LOG_E(TAG_TEST, "Failed to compile  %s  shader: %s", shaderType == GL_VERTEX_SHADER ? "vertex_shader" : "fragment_shader" , infoLog);
             glDeleteShader(shaderId);
             delete[] infoLog;
             return -1;

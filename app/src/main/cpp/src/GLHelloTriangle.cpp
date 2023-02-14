@@ -52,11 +52,11 @@ void GLHelloTriangle::onSurfaceCreate() {
 
     GLint resultParams = -1;
     glGetProgramiv(mProgram, GL_ACTIVE_UNIFORMS, &resultParams);
-    LOG_I(TAG, "active uniforms: %d", resultParams);
+    LOG_I(TAG_TEST, "active uniforms: %d", resultParams);
 
     resultParams = -1;
     glGetProgramiv(mProgram, GL_ACTIVE_UNIFORM_MAX_LENGTH, &resultParams);
-    LOG_I(TAG, "active uniform max length: %d", resultParams );
+    LOG_I(TAG_TEST, "active uniform max length: %d", resultParams );
 
 
 }

@@ -49,8 +49,7 @@ void setNativeImage(JNIEnv * env, jobject object, jint format, jint width, jint 
 }
 
 void updateParameter(JNIEnv * env, jobject obj, jint  paramType, jobject paramObj) {
-    LOG_E("caihui", "==================updateParameter");
-    //glRenderer->updateParameter(env, object);
+    glRenderer->updateParameter(env, paramType, paramObj);
 }
 
 void onSurfaceCreate(JNIEnv *env, jobject object) {

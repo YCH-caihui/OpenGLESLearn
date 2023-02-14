@@ -14,6 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class TextureMapActivity extends GLActivity{
 
+    private static final int PARAM_TYPE_INIT_BITMAP = 0;
 
 
     @Override
@@ -36,5 +37,7 @@ public class TextureMapActivity extends GLActivity{
             byte[] byteArray = buf.array();
             setImageData(GLEngine.IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
         }
+
+        updateParameter(PARAM_TYPE_INIT_BITMAP, bitmap);
     }
 }

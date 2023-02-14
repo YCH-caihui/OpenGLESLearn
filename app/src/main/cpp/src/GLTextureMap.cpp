@@ -3,6 +3,10 @@
 //
 #include "GLTextureMap.h"
 
+#define TAG "YCH/GLTextureMap"
+
+static const int PARAM_TYPE_INIT_BITMAP = 0;
+
 
 const GLchar * vs = {
         "#version 300 es            \n"
@@ -66,11 +70,33 @@ void GLTextureMap::onSurfaceChanged(int width, int height)
 
 void GLTextureMap::initNativeImage()
 {
-    glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mNaiveImage.width, mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
-    glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
 
 }
+
+void GLTextureMap::updateParameter(JNIEnv * env, int paramType, jobject object) {
+     if(paramType == PARAM_TYPE_INIT_BITMAP) {
+         AndroidBitmapInfo info;
+         AndroidBitmap_getInfo(env, object, &info);
+         LOG_I(TAG,"<updateParameter> androidBitmapInfo flags:%d,  format:%d,  width:%d, height:%d, stride:%d",info.flags, info.format, info.width, info.height, info.stride);
+         if(info.format != ANDROID_BITMAP_FORMAT_RGBA_8888) {
+             LOG_E(TAG, "<updateParameter>  error: Unsupported color space");
+             return;
+         }
+
+         u_int8_t * pixels;
+         AndroidBitmap_lockPixels(env, object, (void **)&pixels);
+         mNaiveImage.format = IMAGE_FORMAT_RGBA;
+         mNaiveImage.width = info.width;
+         mNaiveImage.height = info.height;
+         mNaiveImage.plane[0] = pixels;
+         NativeImageUtil::reduction(&mNaiveImage);
+         glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
+         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)mNaiveImage.width, (GLsizei)mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
+         glBindTexture(GL_TEXTURE_2D, GL_NONE);
+         AndroidBitmap_unlockPixels(env, object);
+     }
+ }
 
 void GLTextureMap::onDrawFrame()
 {

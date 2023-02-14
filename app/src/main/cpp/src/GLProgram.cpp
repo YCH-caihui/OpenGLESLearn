@@ -19,7 +19,7 @@ GLProgram::GLProgram(const GLchar * vertexShaderSource, const GLchar * fragmentS
         glGetShaderiv(vertexShaderId, GL_INFO_LOG_LENGTH, &resultParam);
         auto * infoLog = new GLchar[resultParam + 1];
         glGetShaderInfoLog(vertexShaderId, resultParam, nullptr, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "Failed to compile vertex shader: %s", infoLog);
+        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to compile vertex shader: %s", infoLog);
         glDeleteShader(vertexShaderId);
         delete[] infoLog;
         return;
@@ -34,7 +34,7 @@ GLProgram::GLProgram(const GLchar * vertexShaderSource, const GLchar * fragmentS
         glGetShaderiv(fragmentShaderId, GL_INFO_LOG_LENGTH, &resultParam);
         auto * infoLog = new GLchar[resultParam + 1];
         glGetShaderInfoLog(fragmentShaderId, resultParam, nullptr, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "Failed to compile fragment shader: %s", infoLog);
+        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to compile fragment shader: %s", infoLog);
         glDeleteShader(fragmentShaderId);
         delete[] infoLog;
         return;
@@ -50,7 +50,7 @@ GLProgram::GLProgram(const GLchar * vertexShaderSource, const GLchar * fragmentS
         glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &resultParam);
         auto * infoLog = new GLchar[resultParam + 1];
         glGetProgramInfoLog(m_programId, resultParam, 0, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "Failed to lint program: %s", infoLog);
+        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to lint program: %s", infoLog);
         glDeleteProgram(m_programId);
         delete[] infoLog;
         return;

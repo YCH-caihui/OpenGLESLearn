@@ -32,7 +32,7 @@ public:
       mNaiveImage.height = height;
       mNaiveImage.plane[0] = pData;
       NativeImageUtil::reduction(&mNaiveImage);
-      initNativeImage();
+     // initNativeImage();
 
    }
 
@@ -43,7 +43,7 @@ public:
    virtual void initNativeImage() {}
 
 
-   void updateParameter(JNIEnv * env, jobject object) {
+   virtual void updateParameter(JNIEnv * env, int paramType, jobject object) {
    }
 
    virtual void onSurfaceChanged(int width, int height) = 0;
