@@ -28,6 +28,8 @@ private:
 
 
 
+
+
 public:
 
     GLYuvMap();
@@ -36,6 +38,7 @@ public:
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
     void initNativeImage() override;
+    void updateParameter(JNIEnv * env, int paramType, jobject paramObj);
     ~GLYuvMap() {
         if(mTextureBufferId != NULL) {
             delete[] mTextureBufferId;

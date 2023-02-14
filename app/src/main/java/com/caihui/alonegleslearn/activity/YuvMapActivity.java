@@ -14,6 +14,8 @@ import javax.microedition.khronos.opengles.GL10;
 public class YuvMapActivity extends GLActivity {
 
 
+    private static final int PARAM_TYPE_INIT_YUV = 0;
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         super.onSurfaceCreated(gl, config);
@@ -26,7 +28,8 @@ public class YuvMapActivity extends GLActivity {
             byte[] buffer = new byte[inputStream.available()];
            int len = inputStream.read(buffer);
            if(len >= 0) {
-               setImageData(GLEngine.IMAGE_FORMAT_NV21, 840, 1074, buffer);
+              // setImageData(GLEngine.IMAGE_FORMAT_NV21, 840, 1074, buffer);
+               updateParameter(PARAM_TYPE_INIT_YUV, new YUVParam(GLEngine.IMAGE_FORMAT_NV21, 840, 1074, buffer));
            }
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,5 +39,20 @@ public class YuvMapActivity extends GLActivity {
     @Override
     public int getRendererType() {
         return GLEngine.RENDERER_TYPE_YUV_MAP;
+    }
+}
+
+class YUVParam {
+
+    int format;
+    int width;
+    int height;
+    byte[] yuvData;
+
+    YUVParam(int format, int width, int height, byte[] yuvData) {
+        this.format = format;
+        this.width = width;
+        this.height = height;
+        this.yuvData = yuvData;
     }
 }

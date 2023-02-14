@@ -3,6 +3,10 @@
 //
 #include "GLYuvMap.h"
 
+#define TAG "YCH/GLYuvMap"
+
+static const int PARAM_TYPE_INIT_YUV = 0;
+
 static const char * vs = {
         "#version 300 es           \n"
         "layout(location = 0) in vec4 a_position;   \n"
@@ -80,13 +84,41 @@ void GLYuvMap::onSurfaceChanged(int width, int height)
 
 void GLYuvMap::initNativeImage()
 {
-    glBindTexture(GL_TEXTURE_2D, *mTextureBufferId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, mNaiveImage.width, mNaiveImage.height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
-    glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
-    glBindTexture(GL_TEXTURE_2D, *(mTextureBufferId + 1));
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, mNaiveImage.width >> 1, mNaiveImage.height >> 1, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, mNaiveImage.plane[1]);
-    glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
+}
+
+void GLYuvMap::updateParameter(JNIEnv * env, int paramType, jobject paramObj) {
+
+    if(paramType == PARAM_TYPE_INIT_YUV) {
+      jclass  yuvParamClass =  env->GetObjectClass(paramObj);
+      int format = env->GetIntField(paramObj, env->GetFieldID(yuvParamClass, "format", "I"));
+      int width = env->GetIntField(paramObj, env->GetFieldID(yuvParamClass, "width", "I"));
+      int height = env->GetIntField(paramObj, env->GetFieldID(yuvParamClass, "height", "I"));
+      auto yuvData = (jbyteArray)env->GetObjectField(paramObj, env->GetFieldID(
+              yuvParamClass, "yuvData", "[B"));
+      int yuvDataLength = env->GetArrayLength(yuvData);
+
+      auto  * tempYuvBuffers = new jbyte[yuvDataLength]();
+      env->GetByteArrayRegion(yuvData, 0, yuvDataLength, tempYuvBuffers);
+      NativeImage naiveImage{};
+      naiveImage.format = format;
+      naiveImage.width = width;
+      naiveImage.height = height;
+      naiveImage.plane[0] = (u_int8_t *)tempYuvBuffers;
+      NativeImageUtil::reduction(&naiveImage);
+
+      glBindTexture(GL_TEXTURE_2D, *mTextureBufferId);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, (GLsizei)naiveImage.width, (GLsizei)naiveImage.height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, naiveImage.plane[0]);
+      glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
+      glBindTexture(GL_TEXTURE_2D, *(mTextureBufferId + 1));
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, (GLsizei)naiveImage.width >> 1, (GLsizei)naiveImage.height >> 1, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, naiveImage.plane[1]);
+      glBindTexture(GL_TEXTURE_2D, GL_NONE);
+
+      delete [] tempYuvBuffers;
+    }
+
 
 }
 
