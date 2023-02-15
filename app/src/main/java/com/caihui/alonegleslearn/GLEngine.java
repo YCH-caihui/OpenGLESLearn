@@ -37,7 +37,6 @@ public class GLEngine {
 
     public native void updateParameter(int paramType, Object paramObj);
 
-    public native void setNativeImage(int format, int width, int height, byte[] bytes);
     public native void onSurfaceChanged(int width, int height);
     public native void onDrawFrame();
 

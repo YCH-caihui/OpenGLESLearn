@@ -4,6 +4,8 @@
 #include "GLVboEboVao.h"
 
 
+#define TAG "YCH/GLVboEboBao"
+
 void GLYboEBoVao::onSurfaceCreate() {
     mProgram = new GLProgram(vs, fs);
     mPositionIndex = mProgram->getAttribLocation("a_position");
@@ -48,9 +50,28 @@ void GLYboEBoVao::onSurfaceCreate() {
 
 }
 
-void GLYboEBoVao::initNativeImage() {
+
+
+void GLYboEBoVao::updateParameter(JNIEnv * env, int paramType, jobject paramObj) {
+
+    AndroidBitmapInfo info;
+    AndroidBitmap_getInfo(env, paramObj, &info);
+    LOG_I(TAG,"<updateParameter> androidBitmapInfo flags:%d,  format:%d,  width:%d, height:%d, stride:%d",info.flags, info.format, info.width, info.height, info.stride);
+    if(info.format != ANDROID_BITMAP_FORMAT_RGBA_8888) {
+        LOG_E(TAG, "<updateParameter>  error: Unsupported color space");
+        return;
+    }
+
+    u_int8_t * pixels;
+    AndroidBitmap_lockPixels(env, paramObj, (void **)&pixels);
+    NativeImage nativeImage{};
+    nativeImage.format = IMAGE_FORMAT_RGBA;
+    nativeImage.width = info.width;
+    nativeImage.height = info.height;
+    nativeImage.plane[0] = pixels;
+    NativeImageUtil::reduction(&nativeImage);
     glBindTexture(GL_TEXTURE_2D, mTextureId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mNaiveImage.width, mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)nativeImage.width, (GLsizei)nativeImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nativeImage.plane[0]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 }
 

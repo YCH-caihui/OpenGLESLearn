@@ -27,9 +27,6 @@ public abstract   class GLActivity extends AppCompatActivity implements GLSurfac
     }
 
 
-    public void setImageData(int format, int width, int height, byte[] bytes) {
-        mEngine.setNativeImage(format, width, height, bytes);
-    }
 
     public void updateParameter(int paramType, Object paramObj) {
         mEngine.updateParameter(paramType,paramObj);

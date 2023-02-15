@@ -20,27 +20,13 @@
 
 class GLRenderer
 {
-protected:
-    NativeImage mNaiveImage;
 public:
    virtual void onSurfaceCreate() = 0;
 
-   void setNativeImage(int format, int width, int height, uint8_t *pData)
-   {
-      mNaiveImage.format = format;
-      mNaiveImage.width = width;
-      mNaiveImage.height = height;
-      mNaiveImage.plane[0] = pData;
-      NativeImageUtil::reduction(&mNaiveImage);
-     // initNativeImage();
-
-   }
 
    virtual ~GLRenderer() {
-      NativeImageUtil::freeNativeImage(&mNaiveImage);
    }
 
-   virtual void initNativeImage() {}
 
 
    virtual void updateParameter(JNIEnv * env, int paramType, jobject object) {

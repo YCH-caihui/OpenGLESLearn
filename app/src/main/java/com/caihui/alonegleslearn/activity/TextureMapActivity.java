@@ -31,13 +31,9 @@ public class TextureMapActivity extends GLActivity{
     protected void initResource() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.a);
         if(bitmap != null) {
-            int bytes = bitmap.getByteCount();
-            ByteBuffer buf = ByteBuffer.allocate(bytes);
-            bitmap.copyPixelsToBuffer(buf);
-            byte[] byteArray = buf.array();
-            setImageData(GLEngine.IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
+            updateParameter(PARAM_TYPE_INIT_BITMAP, bitmap);
         }
 
-        updateParameter(PARAM_TYPE_INIT_BITMAP, bitmap);
+
     }
 }

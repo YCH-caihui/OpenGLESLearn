@@ -23,7 +23,6 @@ private:
     GLint mTextureLocationId{};
     GLuint mTextureBufferId{};
 
-    NativeImage mNaiveImage;
 
 
 public:
@@ -34,7 +33,6 @@ public:
     void onDrawFrame() override;
     void updateParameter(JNIEnv * env, int paramType, jobject object) override;
     ~GLTextureMap();
-    void initNativeImage() override;
 };
 
 #endif //ALONEGLESLEARN_GLTEXTUREMAP_H

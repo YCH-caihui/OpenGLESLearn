@@ -68,11 +68,6 @@ void GLTextureMap::onSurfaceChanged(int width, int height)
 }
 
 
-void GLTextureMap::initNativeImage()
-{
-
-
-}
 
 void GLTextureMap::updateParameter(JNIEnv * env, int paramType, jobject object) {
      if(paramType == PARAM_TYPE_INIT_BITMAP) {
@@ -86,13 +81,14 @@ void GLTextureMap::updateParameter(JNIEnv * env, int paramType, jobject object) 
 
          u_int8_t * pixels;
          AndroidBitmap_lockPixels(env, object, (void **)&pixels);
-         mNaiveImage.format = IMAGE_FORMAT_RGBA;
-         mNaiveImage.width = info.width;
-         mNaiveImage.height = info.height;
-         mNaiveImage.plane[0] = pixels;
-         NativeImageUtil::reduction(&mNaiveImage);
+         NativeImage nativeImage {};
+         nativeImage.format = IMAGE_FORMAT_RGBA;
+         nativeImage.width = info.width;
+         nativeImage.height = info.height;
+         nativeImage.plane[0] = pixels;
+         NativeImageUtil::reduction(&nativeImage);
          glBindTexture(GL_TEXTURE_2D, mTextureBufferId);
-         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)mNaiveImage.width, (GLsizei)mNaiveImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, mNaiveImage.plane[0]);
+         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)nativeImage.width, (GLsizei)nativeImage.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nativeImage.plane[0]);
          glBindTexture(GL_TEXTURE_2D, GL_NONE);
          AndroidBitmap_unlockPixels(env, object);
      }

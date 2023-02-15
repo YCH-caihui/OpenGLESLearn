@@ -39,15 +39,6 @@ void nativeInit(JNIEnv *env, jobject object,  int rendererType) {
 }
 
 
-void setNativeImage(JNIEnv * env, jobject object, jint format, jint width, jint height, jbyteArray byteArray) {
-    int length =  env->GetArrayLength(byteArray);
-    auto * buf = new u_int8_t[length];
-    env->GetByteArrayRegion(byteArray, 0, length, reinterpret_cast<jbyte *>(buf) );
-    glRenderer->setNativeImage(format, width, height, buf);
-    env->DeleteLocalRef(byteArray);
-
-}
-
 void updateParameter(JNIEnv * env, jobject obj, jint  paramType, jobject paramObj) {
     glRenderer->updateParameter(env, paramType, paramObj);
 }
@@ -76,8 +67,7 @@ static const JNINativeMethod nativeMethod[] = {
         "onSurfaceCreate", "()V", (void *) (onSurfaceCreate),
         "onSurfaceChanged", "(II)V", (void *) (onSurfaceChanged),
         "onDrawFrame", "()V", (void *) (onDrawFrame),
-        "updateParameter","(ILjava/lang/Object;)V", (void *)(updateParameter),
-        "setNativeImage", "(III[B)V",(void *)setNativeImage,
+        "updateParameter","(ILjava/lang/Object;)V", (void *)(updateParameter)
 
 };
 

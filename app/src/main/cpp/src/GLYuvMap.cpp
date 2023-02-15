@@ -82,12 +82,6 @@ void GLYuvMap::onSurfaceChanged(int width, int height)
 
 
 
-void GLYuvMap::initNativeImage()
-{
-
-
-}
-
 void GLYuvMap::updateParameter(JNIEnv * env, int paramType, jobject paramObj) {
 
     if(paramType == PARAM_TYPE_INIT_YUV) {

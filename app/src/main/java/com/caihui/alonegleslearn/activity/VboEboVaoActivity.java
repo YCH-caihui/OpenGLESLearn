@@ -14,6 +14,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class VboEboVaoActivity extends GLActivity {
 
+    private static final int PARAM_TYPE_INIT_BITMAP = 0;
+
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -31,12 +33,10 @@ public class VboEboVaoActivity extends GLActivity {
     protected void initResource() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.a);
         if(bitmap != null) {
-            int bytes = bitmap.getByteCount();
-            ByteBuffer buf = ByteBuffer.allocate(bytes);
-            bitmap.copyPixelsToBuffer(buf);
-            byte[] byteArray = buf.array();
-            setImageData(GLEngine.IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
+            updateParameter(PARAM_TYPE_INIT_BITMAP, bitmap);
         }
+
+
     }
 
 }
