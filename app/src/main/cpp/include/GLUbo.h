@@ -11,11 +11,11 @@
 class GLUbo : public GLRenderer
 {
 private:
-    GLProgram * m_program;
-    GLuint m_blockIndex;
-    GLuint m_blockPoint = 1;
-    GLuint  v_position;
-    GLuint  v_color;
+    GLuint mProgramId;
+    GLuint mBlockIndex;
+    GLuint mBlockPoint = 1;
+    GLuint  mPositionLoc;
+    GLuint  mColorLoc;
 public:
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;

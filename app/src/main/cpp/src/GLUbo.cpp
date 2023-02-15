@@ -36,11 +36,13 @@ void GLUbo::onSurfaceCreate()
             "  o_color = f_color;      \n "
             "}                         \n"
     };
-    m_program = new GLProgram(vertexShader, fragmentShader);
 
 
-   v_position = m_program->getAttribLocation("v_position");
-   v_color = m_program->getAttribLocation("v_color");
+    mProgramId = ProgramUtils::create(vertexShader, fragmentShader);
+
+
+    mPositionLoc = glGetAttribLocation(mProgramId, "v_position");
+    mColorLoc = glGetAttribLocation(mProgramId, "v_color");
    int maxVertexUniform, maxFragmentUniform;
    glGetIntegerv(GL_MAX_VERTEX_UNIFORM_COMPONENTS, &maxVertexUniform);
    glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_COMPONENTS, &maxFragmentUniform);
@@ -53,14 +55,14 @@ void GLUbo::onSurfaceChanged(int width, int height)
 {
 
     glm::mat4  proj = glm::ortho(0.0f, (float)width, (float)height, 0.0f, 1.0f, -1.0f);
-    m_blockIndex = m_program->glGetUniformBlockIndex("MatrixBlock");
-    m_program->glUniformBlockBinding(m_blockIndex, m_blockPoint);
+    mBlockIndex = glGetUniformBlockIndex(mProgramId, "MatrixBlock");
+    glUniformBlockBinding(mProgramId, mBlockIndex, mBlockPoint);
     GLuint uboId = -1;
     glGenBuffers(1, &uboId);
     glBindBuffer(GL_UNIFORM_BUFFER, uboId);
     glBufferData(GL_UNIFORM_BUFFER, sizeof(proj) + sizeof(glm::vec4), nullptr, GL_DYNAMIC_READ);
    // glBindBufferBase(GL_UNIFORM_BUFFER, m_blockPoint, uboId);
-    glBindBufferRange(GL_UNIFORM_BUFFER, m_blockPoint, uboId, 0,  sizeof(glm::mat4) + sizeof(glm::vec4));
+    glBindBufferRange(GL_UNIFORM_BUFFER, mBlockPoint, uboId, 0,  sizeof(glm::mat4) + sizeof(glm::vec4));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     glm::vec4 color = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
@@ -78,7 +80,7 @@ void GLUbo::onSurfaceChanged(int width, int height)
 
 void GLUbo::onDrawFrame()
 {
-    m_program->useToRenderer();
+    glUseProgram(mProgramId);
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -89,12 +91,12 @@ void GLUbo::onDrawFrame()
     };
 
 
-    glEnableVertexAttribArray(v_position);
-    glEnableVertexAttribArray(v_color);
-    glVertexAttribPointer(v_position, 4, GL_FLOAT, GL_FALSE, sizeof(float ) *  8, triangle);
-    glVertexAttribPointer(v_color, 4, GL_FLOAT, GL_FALSE, sizeof(float ) * 8, &triangle[4]);
+    glEnableVertexAttribArray(mPositionLoc);
+    glEnableVertexAttribArray(mColorLoc);
+    glVertexAttribPointer(mPositionLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float ) *  8, triangle);
+    glVertexAttribPointer(mColorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float ) * 8, &triangle[4]);
     glDrawArrays(GL_TRIANGLES, 0, 3 );
-    glDisableVertexAttribArray(v_position);
-    glDisableVertexAttribArray(v_color);
+    glDisableVertexAttribArray(mPositionLoc);
+    glDisableVertexAttribArray(mColorLoc);
 
 }

@@ -43,10 +43,10 @@ private:
     };
 
     VBORect * mRect;
-    GLProgram * mProgram;
-    GLuint mPositionIndex;
-    GLuint mTexCoordinateIndex;
-    GLuint mTextureIndex;
+    GLuint  mProgramId;
+    GLuint mPositionLoc;
+    GLuint mTexCoordinateLoc;
+    GLuint mTextureLoc;
     GLuint mTextureId;
 
     GLuint mVaoId;

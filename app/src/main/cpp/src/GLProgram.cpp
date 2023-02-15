@@ -4,99 +4,49 @@
 #include "GLProgram.h"
 
 
-GLProgram::GLProgram(const GLchar * vertexShaderSource, const GLchar * fragmentShaderSource)
-{
-    GLint resultParam = -1;
-    GLuint vertexShaderId = -1;
-    GLuint fragmentShaderId = -1;
+#define TAG "YCH/GLProgram"
 
-    vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShaderId, 1, &vertexShaderSource, nullptr);
-    glCompileShader(vertexShaderId);
-    glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &resultParam);
-    if(resultParam != GL_TRUE)
-    {
-        glGetShaderiv(vertexShaderId, GL_INFO_LOG_LENGTH, &resultParam);
+ GLuint ProgramUtils::create(const GLchar * vShader, const GLchar * fShader) {
+    auto vShaderId = buildShader(GL_VERTEX_SHADER, vShader);
+    auto fShaderId = buildShader(GL_FRAGMENT_SHADER, fShader);
+    if(vShaderId == -1 || fShaderId == -1) return -1;
+    GLuint  programId  = glCreateProgram();
+    glAttachShader(programId, vShaderId);
+    glAttachShader(programId, fShaderId);
+    glLinkProgram(programId);
+
+    GLint  resultParam = -1;
+    glGetProgramiv(programId, GL_LINK_STATUS, &resultParam);
+    if(resultParam != GL_TRUE) {
+        glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &resultParam);
         auto * infoLog = new GLchar[resultParam + 1];
-        glGetShaderInfoLog(vertexShaderId, resultParam, nullptr, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to compile vertex shader: %s", infoLog);
-        glDeleteShader(vertexShaderId);
+        glGetProgramInfoLog(programId, resultParam, 0, infoLog);
+        LOG_E(TAG, "Failed to lint program: %s", infoLog);
+        glDeleteProgram(programId);
+        delete [] infoLog;
+        return -1;
+    }
+    return programId;
+}
+
+
+ GLuint ProgramUtils::buildShader(GLenum shaderType, const GLchar * shaderSource) {
+    GLuint shaderId = glCreateShader(shaderType);
+    glShaderSource(shaderId, 1, &shaderSource, nullptr);
+    glCompileShader(shaderId);
+    GLint  compileStates = -1;
+    glGetShaderiv(shaderId, GL_COMPILE_STATUS, &compileStates);
+    if(compileStates  != GL_TRUE) {
+        GLint infoLogLength  = -1;
+        glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
+        auto  * infoLog = new GLchar [infoLogLength + 1];
+        glGetShaderInfoLog(shaderId, infoLogLength, nullptr, infoLog);
+        LOG_E(TAG, "Failed to compile  %s  shader: %s", shaderType == GL_VERTEX_SHADER ? "vertex_shader" : "fragment_shader" , infoLog);
+        glDeleteShader(shaderId);
         delete[] infoLog;
-        return;
+        return -1;
     }
 
-    fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShaderId, 1, &fragmentShaderSource, nullptr);
-    glCompileShader(fragmentShaderId);
-    glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &resultParam);
-    if(resultParam != GL_TRUE)
-    {
-        glGetShaderiv(fragmentShaderId, GL_INFO_LOG_LENGTH, &resultParam);
-        auto * infoLog = new GLchar[resultParam + 1];
-        glGetShaderInfoLog(fragmentShaderId, resultParam, nullptr, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to compile fragment shader: %s", infoLog);
-        glDeleteShader(fragmentShaderId);
-        delete[] infoLog;
-        return;
-    }
-
-    m_programId = glCreateProgram();
-    glAttachShader(m_programId, vertexShaderId);
-    glAttachShader(m_programId, fragmentShaderId);
-    glLinkProgram(m_programId);
-    glGetProgramiv(m_programId, GL_LINK_STATUS, &resultParam);
-    if(resultParam != GL_TRUE)
-    {
-        glGetProgramiv(m_programId, GL_INFO_LOG_LENGTH, &resultParam);
-        auto * infoLog = new GLchar[resultParam + 1];
-        glGetProgramInfoLog(m_programId, resultParam, 0, infoLog);
-        __android_log_print(ANDROID_LOG_ERROR, TAG_TEST, "Failed to lint program: %s", infoLog);
-        glDeleteProgram(m_programId);
-        delete[] infoLog;
-        return;
-    }
-
-    glDeleteShader(vertexShaderId);
-    glDeleteShader(fragmentShaderId);
+    return shaderId;
 }
 
-GLuint GLProgram::glGetUniformBlockIndex(const GLchar *uniformBlockName)
-{
-   return ::glGetUniformBlockIndex(m_programId, uniformBlockName);
-}
-
-void GLProgram::glUniformBlockBinding(GLuint blockIndex, GLuint uBlockBinding)
-{
-    return ::glUniformBlockBinding(m_programId, blockIndex, uBlockBinding);
-}
-
-void GLProgram::useToRenderer()
-{
-    glUseProgram(m_programId);
-}
-
-GLuint GLProgram::getAttribLocation(const GLchar *name)
-{
-    return glGetAttribLocation(m_programId, name);
-}
-
-GLuint GLProgram::getUniformLocation(const char *name)
-{
-    return glGetUniformLocation(m_programId, name);
-}
-
-
-void  GLProgram::getActiveUniforms(GLint * params)
-{
-    glGetProgramiv(m_programId, GL_ACTIVE_UNIFORMS, params );
-}
-
-void GLProgram::getActiveUniformMaxLength(GLint * params)
-{
-    glGetProgramiv(m_programId, GL_ACTIVE_UNIFORM_MAX_LENGTH, params);
-}
-
-GLProgram::~GLProgram()
-{
-    glDeleteProgram(m_programId);
-}

@@ -7,11 +7,10 @@
 #define TAG "YCH/GLVboEboBao"
 
 void GLYboEBoVao::onSurfaceCreate() {
-    mProgram = new GLProgram(vs, fs);
-    mPositionIndex = mProgram->getAttribLocation("a_position");
-    mTexCoordinateIndex  = mProgram->getAttribLocation("a_texCoordinate");
-    mTextureIndex = mProgram->getUniformLocation("s_textureMap");
-
+    mProgramId = ProgramUtils::create(vs, fs);
+    mPositionLoc = glGetAttribLocation(mProgramId, "a_position");
+    mTexCoordinateLoc = glGetAttribLocation(mProgramId, "a_texCoordinate");
+    mTextureLoc = glGetAttribLocation(mProgramId, "s_textureMap");
     glGenTextures(1, &mTextureId);
     glBindTexture(GL_TEXTURE_2D, mTextureId);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -38,10 +37,10 @@ void GLYboEBoVao::onSurfaceCreate() {
     glBindVertexArray(mVaoId);
     //在绑定 VAO之后， 操作VBO, 当前VAO会记录VBO的操作
     glBindBuffer(GL_ARRAY_BUFFER, mVboIds[0]);
-    glEnableVertexAttribArray(mPositionIndex);
-    glEnableVertexAttribArray(mTexCoordinateIndex);
-    glVertexAttribPointer(mPositionIndex, 3, GL_FLOAT, GL_FALSE, sizeof(VBORect), (const void *)0);
-    glVertexAttribPointer(mTexCoordinateIndex, 2, GL_FLOAT ,GL_FALSE, sizeof(VBORect),  (const void *)sizeof(mRect->position));
+    glEnableVertexAttribArray(mPositionLoc);
+    glEnableVertexAttribArray(mTexCoordinateLoc);
+    glVertexAttribPointer(mPositionLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VBORect), (const void *)0);
+    glVertexAttribPointer(mTexCoordinateLoc, 2, GL_FLOAT ,GL_FALSE, sizeof(VBORect),  (const void *)sizeof(mRect->position));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mVboIds[1]);
     glBindVertexArray(GL_NONE);
 
@@ -85,11 +84,11 @@ void GLYboEBoVao::onDrawFrame() {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glClearColor(0.4, 0.4, 0.4, 1.0);
 
-    mProgram->useToRenderer();
+    glUseProgram(mProgramId);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, mTextureId);
-    glUniform1i(mTextureIndex, 0);
+    glUniform1i(mTextureLoc, 0);
 
     glBindVertexArray(mVaoId);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const void *)0);
