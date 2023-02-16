@@ -37,7 +37,7 @@ public:
     void onSurfaceCreate() override;
     void onSurfaceChanged(int width, int height) override;
     void onDrawFrame() override;
-    void updateParameter(JNIEnv * env, int paramType, jobject paramObj);
+    void updateParameter(JNIEnv * env, int paramType, jobject paramObj) override;
     ~GLYuvMap() {
         if(mTextureBufferId != NULL) {
             delete[] mTextureBufferId;

@@ -21,6 +21,7 @@
         <activity android:name=".activity.TextureMapActivity"/>
         <activity android:name=".activity.YuvMapActivity"/>
         <activity android:name=".activity.VboEboVaoActivity"/>
+        <activity android:name=".activity.TransformSampleActivity"/>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ public class GLEngine {
     public static final int RENDERER_TYPE_TEXTURE_MAP = 102;
     public static final int RENDERER_TYPE_YUV_MAP = 103;
     public static final int RENDERER_TYPE_VBO_EBO_VAO = 104;
+    public static final int RENDERER_TYPE_TRANSFORM_SAMPLE = 105;
 
 
 

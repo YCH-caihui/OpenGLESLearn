@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_texture).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TextureMapActivity.class)));
         findViewById(R.id.bt_yuv_map).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, YuvMapActivity.class)));
         findViewById(R.id.bt_vbo).setOnClickListener(v-> startActivity(new Intent(MainActivity.this, VboEboVaoActivity.class)));
+        findViewById(R.id.bt_transform).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TransformSampleActivity.class)));
     }
 }

@@ -35,4 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="vbo_ebo_vao"/>
+
+    <Button
+        android:id="@+id/bt_transform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transform_sample"/>
 </LinearLayout>
